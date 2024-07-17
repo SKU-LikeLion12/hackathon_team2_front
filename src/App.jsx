@@ -12,13 +12,7 @@ import View from "./pages/View";
 import BeautySpa from "./pages/BeautySpa";
 import Book from "./pages/Book";
 
-import {
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-  BrowserRouter,
-} from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
