@@ -1,5 +1,13 @@
 import React from "react";
+import Nav from "../components/nav";
+import Header from "../components/header";
 
 export default function Book() {
-  return <div>Bookk</div>;
+  return (
+    <div>
+      <Header />
+      <Nav />
+      Book
+    </div>
+  );
 }
