@@ -24,6 +24,7 @@ export default function footer() {
         <div className="flex justify-center items-center">
           <div className="mx-8">|</div>
           <div>이메일수집거부</div>
+          <div className="mx-8">|</div>
         </div>
       </div>
       <div className="flex w-[70%] justify-center items-center text-sm font-medium font-['Pretendard'] mt-4">

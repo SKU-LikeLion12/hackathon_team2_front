@@ -25,7 +25,7 @@ const SlidePlace = () => {
         navigation
         // pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
-        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
       >
         {/* 얘도 동적으로 처리해서 나중에는 mockData 삭제하고 DB로 받아오기 */}
         <SwiperSlide>
