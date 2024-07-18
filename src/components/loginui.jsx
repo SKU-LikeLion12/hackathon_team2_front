@@ -36,9 +36,9 @@ export default function Loginui() {
               onChange={handlePw}
             />
           </div>
-          <div className="flex justify-center items-center bg-[#47A5A5] rounded-2xl p-3 text-white text-lg font-['Pretendard'] font-medium mt-8">
+          <button className="flex justify-center items-center bg-[#47A5A5] rounded-2xl p-3 text-white text-lg font-['Pretendard'] font-medium mt-8">
             로그인
-          </div>
+          </button>
         </div>
         <div className="flex justify-center items-center">
           <div className="font-['Pretendard'] font-semibold my-8 text-sm mr-3">
