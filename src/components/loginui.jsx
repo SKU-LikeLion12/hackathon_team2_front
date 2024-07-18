@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function loginui() {
+export default function Loginui() {
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
+
+  const handleId = (e) => {
+    setId(e.target.value);
+  };
+
+  const handlePw = (e) => {
+    setPw(e.target.value);
+  };
+
   return (
     <div>
       <div className="flex flex-col justify-center items-center p-28">
@@ -12,13 +23,17 @@ export default function loginui() {
           <div className="flex flex-col font-['Pretendard'] text-gray-500">
             <input
               type="text"
+              value={id}
               placeholder="아이디"
               className="border-[2px] border-b-0 rounded-t-lg p-2"
+              onChange={handleId}
             />
             <input
               type="text"
+              value={pw}
               placeholder="비밀번호"
               className="border-[2px] rounded-b-lg p-2"
+              onChange={handlePw}
             />
           </div>
           <div className="flex justify-center items-center bg-[#47A5A5] rounded-2xl p-3 text-white text-lg font-['Pretendard'] font-medium mt-8">
