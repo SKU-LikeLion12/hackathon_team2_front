@@ -1,6 +1,9 @@
+/* tatilwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* font import */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 @font-face {
   font-family: "SDSamliphopangche_Outline";
@@ -27,6 +30,8 @@
   font-display: swap;
 }
 
+/* swiper css */
+
 .swiper-button-next,
 .swiper-button-prev {
   --swiper-theme-color: white;
@@ -34,4 +39,62 @@
   --swiper-navigation-top-offset: 40%;
   /* background-color: rgba(0, 0, 0, 0.5); */
   margin: 5px;
+}
+
+/* checkbox css */
+.custom-checkbox {
+  display: inline-flex;
+  align-items: center;
+}
+
+.custom-checkbox label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.custom-checkbox .checkmark {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  margin-right: 30px;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #47a5a5;
+  border-color: #87cbcb;
+}
+
+.custom-checkbox .checkmark svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  fill: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.custom-checkbox input:checked ~ .checkmark svg {
+  opacity: 1;
+}
+
+.custom-checkbox:hover .checkmark {
+  border-color: #87cbcb;
 }
