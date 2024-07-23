@@ -47,7 +47,7 @@ export default function Nav() {
             </svg>
           </Link>
         </div>
-        <div className="relative text-lg mx-12 my-auto">
+        <div className="relative text-lg mx-12 my-auto z-[5]">
           <div
             onClick={() => toggleDropdown("brand")}
             className="cursor-pointer"
@@ -57,7 +57,7 @@ export default function Nav() {
           {activeDropdown === "brand" && (
             <div className="border-t-4 border-[#499A94] absolute left-1/2 transform -translate-x-1/2 mt-[25px] w-48 bg-[#F8F8F8] text-center font-['GmarketSans-light']">
               <Link
-                to="wellness"
+                to="/wellness"
                 className="block px-4 py-4 my-2 text-gray-800 hover:bg-gray-200 hover:font-['GmarketSans']"
               >
                 웰니스란?

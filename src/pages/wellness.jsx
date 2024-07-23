@@ -13,10 +13,10 @@ export default function wellness() {
         <img
           src={`${process.env.PUBLIC_URL}/img/back.png`}
           alt="Background"
-          className="relative"
+          className="relative z-[-20]"
         />
 
-        <div className="absolute text-center bg-white rounded-3xl top-[45%] w-[50%] h-[30%]">
+        <div className="absolute text-center bg-white rounded-3xl top-[45%] w-[50%] h-[30%] z-[-20]">
           <h1 className="flex justify-center mt-8 text-3xl ">웰니스란?</h1>
           <p className="mt-4">
             웰빙(well-being)과 행복(happiness) 건강(fitness)의 합성어로
