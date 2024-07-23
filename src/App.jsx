@@ -1,16 +1,16 @@
 import React from "react";
-import Home from "./pages/Home";
-import LogIn from "./pages/LogIn";
-import SignUp from "./pages/SignUp";
-import Support from "./pages/Support";
-import Wellness from "./pages/Wellness";
-import Shimple from "./pages/Shimple";
+import Home from "./pages/home";
+import LogIn from "./pages/logIn";
+import SignUp from "./pages/signUp";
+import Support from "./pages/support";
+import Wellness from "./pages/wellness";
+import Shimple from "./pages/shimple";
 import HealingMeditation from "./pages/HealingMeditation";
 import NatureForestTherapy from "./pages/NatureForestTherapy";
 import OrientalMedicine from "./pages/OrientalMedicine";
-import View from "./pages/View";
+import View from "./pages/view";
 import BeautySpa from "./pages/BeautySpa";
-import Book from "./pages/Book";
+import Book from "./pages/book";
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
