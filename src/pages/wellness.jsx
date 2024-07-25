@@ -37,14 +37,14 @@ export default function wellness() {
             신체적, 정신적, 사회적, 환경적 등 건강과 행복을 달성함으로
             극대화하는 개념,
             <br /> 단순히 질병이 없는 상태를 넘어서서 전반적인 삶의 질을
-            향상시키는 것을 목표로 합니다.
-          </p>
-        </div>
+            향상시키는 것을 목표로 합니다. 
+          </p>                          
+        </div>  
 
         <div className="flex justify-center mt-20 mb-10">
           <img
             src={`${process.env.PUBLIC_URL}/img/donutchart.png`}
-            alt="Background"
+            alt="dountchart"
           />
         </div>
       </div>
