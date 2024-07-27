@@ -1,0 +1,50 @@
+[
+  {
+    "wellnessId": 10,
+    "location": 0,
+    "theme": 0,
+    "title": "티테라피"
+  },
+  {
+    "wellnessId": 12,
+    "location": 0,
+    "theme": 0,
+    "title": "여용국 한방스파"
+  },
+  {
+    "wellnessId": 15,
+    "location": 0,
+    "theme": 0,
+    "title": "서울한방진흥센터"
+  },
+  {
+    "wellnessId": 17,
+    "location": 0,
+    "theme": 0,
+    "title": "이문원 한의원"
+  },
+  {
+    "wellnessId": 43,
+    "location": 10,
+    "theme": 0,
+    "title": "구이안덕 건강힐링 체험마을"
+  },
+  {
+    "wellnessId": 44,
+    "location": 10,
+    "theme": 0,
+    "title": "태권도원 상징지구"
+  },
+  {
+    "wellnessId": 54,
+    "location": 13,
+    "theme": 0,
+    "title": "산청 동의보감촌"
+  },
+  {
+    "wellnessId": 56,
+    "location": 13,
+    "theme": 0,
+    "title": "하늘호수"
+  }
+]
