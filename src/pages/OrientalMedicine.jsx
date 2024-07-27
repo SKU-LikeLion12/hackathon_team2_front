@@ -107,6 +107,7 @@ export default function OrientalMedicine() {
               <div key={item.wellnessId}>
                 <img src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`} alt={item.title} />
                 <div className="font-['GmarketSans'] mt-[8px]">{item.title}</div>
+                
               </div>
             ))}
           </div>
