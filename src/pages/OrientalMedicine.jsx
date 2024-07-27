@@ -22,8 +22,6 @@ export default function OrientalMedicine(HanBang) {
 
   return (
     <div>
-      <Header />
-      <Nav />
       <div className="relative z-[-20]">
         <img src={`${process.env.PUBLIC_URL}/img/hanbang.png`} alt="로고" />
         <div className="absolute left-[48%] top-[26%] font-['GmarketSans'] text-[40px] font-bold">

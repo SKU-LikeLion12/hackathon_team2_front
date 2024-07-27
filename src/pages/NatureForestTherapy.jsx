@@ -6,8 +6,6 @@ import Footer from "../components/footer";
 export default function natureForestTherapy() {
   return (
     <div>
-      <Header />
-      <Nav />
       natureForestTherapy
       <Footer />
     </div>

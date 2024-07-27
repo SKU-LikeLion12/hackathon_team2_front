@@ -6,8 +6,6 @@ import Footer from "../components/footer";
 export default function view() {
   return (
     <div>
-      <Header />
-      <Nav />
       view
       <Footer />
     </div>

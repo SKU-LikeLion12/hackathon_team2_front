@@ -156,8 +156,6 @@ export default function SignUp() {
 
   return (
     <div>
-      <Header />
-      <Nav />
       <div className="font-['Pretendard'] w-full max-w-2xl mx-auto">
         <h2 className="text-2xl font-semibold text-center my-8">회원가입</h2>
         <div className="w-full h-8 border-b-2 border-black pb-2 mb-8">
