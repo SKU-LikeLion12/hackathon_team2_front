@@ -35,7 +35,7 @@ export default function OrientalMedicine() {
   };
 
   return (
-    <div>
+    <div className="relative">
       <Header />
       <Nav />
       <div className="relative z-[-20]">
@@ -44,77 +44,95 @@ export default function OrientalMedicine() {
           한방
         </div>
       </div>
-
-      <div className="top-1/2 left-2 p-2 rounded-2xl w-[12%] h-[10%] mt-[5px] ml-[2%] sticky bg-[#F8F8F8F8] z-10s">
-        <div 
-          onClick={() => scrollToSection(seoulRef, "서울")}
-          className={`cursor-pointer p-2 my-2 rounded-3xl text-center font-['GmarketSans'] font-thin ${selectedRegion === "서울" ? "bg-[#47A5A5]" : "bg-[#E0EDE6]"}`}
-        >
-          서울
-        </div>
-        <div className="flex justify-center my-2">
-          <img src={`${process.env.PUBLIC_URL}/img/Line.png`} alt="Line" className="max-w-xs" />
-        </div>
-        <div
-          onClick={() => scrollToSection(jeonbukRef, "전북특별자치도")}
-          className={`cursor-pointer p-2 my-2 rounded-3xl text-center font-['GmarketSans'] font-thin ${selectedRegion === "전북특별자치도" ? "bg-[#47A5A5]" : "bg-[#E0EDE6]"}`}
-        >
-          전북특별자치도
-        </div>
-        <div className="flex justify-center my-2">
-        <img src={`${process.env.PUBLIC_URL}/img/Line.png`} alt="Line" className="max-w-xs max-h-[2%]" />
-        </div>
-        <div
-          onClick={() => scrollToSection(gyeongnamRef, "경상남도")}
-          className={`cursor-pointer p-2 my-2 rounded-3xl text-center font-['GmarketSans'] font-thin ${selectedRegion === "경상남도" ? "bg-[#47A5A5]" : "bg-[#E0EDE6]"}`}
-        >
-          경상남도
-        </div>
-      </div>
-
-
-
-
-
-    <div>
-      <div ref={seoulRef}>
-        <h1 className="text-[20px] font-['GmarketSans'] text-center ">서울</h1>
-        <hr className="flex w-[73%] my-4 ml-[14%] border-t border-gray-300" />
-        {groupByLocation(0).map(item => (
-          <div key={item.wellnessId}>
-            <img src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`} alt={item.title} />
-
-            <div>{item.location}</div>
-            <div>{item.wellnessId}</div>
+      
+      <div>
+        <div className="top-1/4 left-2 p-2 rounded-2xl w-[12%] h-[28%] mt-[5px] ml-[2%] fixed bg-[#F8F8F8F8] z-10">
+          <div 
+            onClick={() => scrollToSection(seoulRef, "서울")}
+            className={`cursor-pointer p-2 my-2 rounded-3xl text-center font-['GmarketSans'] font-thin ${selectedRegion === "서울" ? "bg-[#47A5A5]" : "bg-[#E0EDE6]"}`}
+          >
+            서울
           </div>
-        ))}
-      </div>
-    </div>
-      <div ref={jeonbukRef}>
-        <h1 className="text-[20px] font-['GmarketSans'] text-center">전북특별자치도</h1>
-        <hr className="flex w-[73%] my-4 ml-[14%] border-t border-gray-300" />
-        {groupByLocation(10).map(item => (
-          <div key={item.wellnessId}>
-            <img src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`} alt={item.title} />
-            <div>{item.location}</div>
-            <div>{item.wellnessId}</div>
+          <div className="flex justify-center my-2">
+            <img src={`${process.env.PUBLIC_URL}/img/Line.png`} alt="Line" className="max-w-xs" />
           </div>
-        ))}
-      </div>
-
-      <div ref={gyeongnamRef}>
-        <h1 className="text-[20px] font-['GmarketSans'] text-center">경상남도</h1>
-        <hr className="flex w-[73%] my-4 ml-[14%] border-t border-gray-300" />
-        {groupByLocation(13).map(item => (
-          <div key={item.wellnessId}>
-            <img src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`} alt={item.title} />
-            <div>{item.location}</div>
-            <div>{item.wellnessId}</div>
+          <div
+            onClick={() => scrollToSection(jeonbukRef, "전북특별자치도")}
+            className={`cursor-pointer p-2 my-2 rounded-3xl text-center font-['GmarketSans'] font-thin ${selectedRegion === "전북특별자치도" ? "bg-[#47A5A5]" : "bg-[#E0EDE6]"}`}
+          >
+            전북특별자치도
           </div>
-        ))}
-      </div>
+          <div className="flex justify-center my-2">
+          <img src={`${process.env.PUBLIC_URL}/img/Line.png`} alt="Line" className="max-w-xs max-h-[2%]" />
+          </div>
+          <div
+            onClick={() => scrollToSection(gyeongnamRef, "경상남도")}
+            className={`cursor-pointer p-2 my-2 rounded-3xl text-center font-['GmarketSans'] font-thin ${selectedRegion === "경상남도" ? "bg-[#47A5A5]" : "bg-[#E0EDE6]"}`}
+          >
+            경상남도
+          </div>
+        </div>
 
-      <Footer />
+
+
+
+
+      <div>
+        
+        <div ref={seoulRef} className="flex flex-col items-center justify-end">
+          <div className="flex flex-col w-full"> 
+            <h1 className="text-[20px] font-['GmarketSans'] text-center ">서울</h1>
+            <hr className="flex w-[73%] my-4 ml-[14%] border-t border-gray-300" />
+          </div>
+          
+          <div className="flex flex-wrap items-center justify-center space-x-3">
+          {groupByLocation(0).map(item => (
+            <div key={item.wellnessId}>
+              <img src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`} alt={item.title} />
+              <div>{item.location}</div>
+              <div>{item.wellnessId}</div>
+            </div>
+          ))}
+          </div>
+        </div>
+      </div>
+      
+        <div ref={jeonbukRef} className="flex flex-col items-center justify-center">
+          <div className="flex flex-col w-full">
+            <h1 className="text-[20px] font-['GmarketSans'] text-center">전북특별자치도</h1>
+            <hr className="flex w-[73%] my-4 ml-[14%] border-t border-gray-300" />
+          </div>
+          
+          <div className="flex space-x-3">
+            {groupByLocation(10).map(item => (
+              <div key={item.wellnessId}>
+                <img src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`} alt={item.title} />
+                <div>{item.location}</div>
+                <div>{item.wellnessId}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      <div ref={gyeongnamRef} className="flex flex-col items-center justify-center">
+        <div className="flex flex-col w-full">
+          <h1 className="text-[20px] font-['GmarketSans'] text-center">경상남도</h1>
+          <hr className="flex w-[73%] my-4 ml-[14%] border-t border-gray-300" />
+        </div>
+          
+        <div className="flex space-x-3">
+          {groupByLocation(13).map(item => (
+            <div key={item.wellnessId}>
+              <img src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`} alt={item.title} />
+              <div>{item.location}</div>
+              <div>{item.wellnessId}</div>
+            </div>
+          ))}
+          </div>
+        </div>
+
+        <Footer />
+      </div>
     </div>
   );
 }
