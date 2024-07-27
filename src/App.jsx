@@ -12,6 +12,7 @@ import OrientalMedicine from "./pages/OrientalMedicine";
 import View from "./pages/view";
 import BeautySpa from "./pages/BeautySpa";
 import Book from "./pages/book";
+import Booking from "./pages/booking";
 import Header from "./components/header";
 import Nav from "./components/nav";
 import DetailInfo from "./pages/detailInfo";
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/beautySpa" element={<BeautySpa />} />
           <Route path="/book" element={<Book />} />
           <Route path="/detailInfo" element={<DetailInfo />} />
+          <Route path="/booking" element={<Booking />} />
         </Routes>
       </BrowserRouter>
     </div>

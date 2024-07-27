@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/footer";
 import onePunch from "../json/onePunch";
 
@@ -8,6 +9,8 @@ export default function OrientalMedicine() {
   const seoulRef = useRef(null);
   const jeonbukRef = useRef(null);
   const gyeongnamRef = useRef(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchHanbang = async () => {
@@ -30,6 +33,10 @@ export default function OrientalMedicine() {
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const navigateToPage = (path) => {
+    navigate(path);
   };
 
   return (
@@ -103,6 +110,10 @@ export default function OrientalMedicine() {
                   <img
                     src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`}
                     alt={item.title}
+                    onClick={() => {
+                      navigateToPage("/detailInfo");
+                    }}
+                    className="cursor-pointer"
                   />
                   <div className="font-['GmarketSans'] mt-[8px]">
                     {item.title}
@@ -130,6 +141,10 @@ export default function OrientalMedicine() {
                 <img
                   src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`}
                   alt={item.title}
+                  onClick={() => {
+                    navigateToPage("/detailInfo");
+                  }}
+                  className="cursor-pointer"
                 />
                 <div className="font-['GmarketSans'] mt-[8px]">
                   {item.title}
@@ -156,6 +171,10 @@ export default function OrientalMedicine() {
                 <img
                   src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`}
                   alt={item.title}
+                  onClick={() => {
+                    navigateToPage("/detailInfo");
+                  }}
+                  className="cursor-pointer"
                 />
                 <div className="font-['GmarketSans'] mt-[8px]">
                   {item.title}

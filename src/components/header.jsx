@@ -24,7 +24,6 @@ export default function Header() {
               <div>고객센터</div>
             </Link>
             <div>언어</div>
-            <Link to="/detailInfo">상세페이지</Link>
           </div>
         </div>
       </div>
