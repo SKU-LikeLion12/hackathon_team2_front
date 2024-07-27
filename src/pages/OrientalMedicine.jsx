@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import Nav from "../components/nav";
-import Header from "../components/header";
 import Footer from "../components/footer";
 import onePunch from "../json/onePunch";
 
