@@ -81,7 +81,7 @@ export default function OrientalMedicine() {
         
         <div ref={seoulRef} className="flex flex-col items-center justify-end">
           <div className="flex flex-col w-full"> 
-            <h1 className="text-[20px] font-['GmarketSans'] text-center ">서울</h1>
+            <h1 className="text-[20px] font-['GmarketSans'] text-center mt-[3%]">서울</h1>
             <hr className="flex w-[73%] my-4 ml-[14%] border-t border-gray-300" />
           </div>
           
@@ -89,8 +89,7 @@ export default function OrientalMedicine() {
           {groupByLocation(0).map(item => (
             <div key={item.wellnessId}>
               <img src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`} alt={item.title} />
-              <div>{item.location}</div>
-              <div>{item.wellnessId}</div>
+              <div className="font-['GmarketSans'] mt-[8px]">{item.title}</div>
             </div>
           ))}
           </div>
@@ -99,7 +98,7 @@ export default function OrientalMedicine() {
       
         <div ref={jeonbukRef} className="flex flex-col items-center justify-center">
           <div className="flex flex-col w-full">
-            <h1 className="text-[20px] font-['GmarketSans'] text-center">전북특별자치도</h1>
+            <h1 className="text-[20px] font-['GmarketSans'] text-center mt-[3%]">전북특별자치도</h1>
             <hr className="flex w-[73%] my-4 ml-[14%] border-t border-gray-300" />
           </div>
           
@@ -107,8 +106,7 @@ export default function OrientalMedicine() {
             {groupByLocation(10).map(item => (
               <div key={item.wellnessId}>
                 <img src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`} alt={item.title} />
-                <div>{item.location}</div>
-                <div>{item.wellnessId}</div>
+                <div className="font-['GmarketSans'] mt-[8px]">{item.title}</div>
               </div>
             ))}
           </div>
@@ -116,7 +114,7 @@ export default function OrientalMedicine() {
 
       <div ref={gyeongnamRef} className="flex flex-col items-center justify-center">
         <div className="flex flex-col w-full">
-          <h1 className="text-[20px] font-['GmarketSans'] text-center">경상남도</h1>
+          <h1 className="text-[20px] font-['GmarketSans'] text-center mt-[3%]">경상남도</h1>
           <hr className="flex w-[73%] my-4 ml-[14%] border-t border-gray-300" />
         </div>
           
@@ -124,8 +122,7 @@ export default function OrientalMedicine() {
           {groupByLocation(13).map(item => (
             <div key={item.wellnessId}>
               <img src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`} alt={item.title} />
-              <div>{item.location}</div>
-              <div>{item.wellnessId}</div>
+              <div className="font-['GmarketSans'] mt-[8px]">{item.title}</div>
             </div>
           ))}
           </div>
