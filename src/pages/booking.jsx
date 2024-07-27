@@ -2,6 +2,7 @@ import React from "react";
 import Nav from "../components/nav";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import { Link } from "react-router-dom";
 
 export default function Booking() {
   return (
@@ -69,12 +70,16 @@ export default function Booking() {
           {/* 하단 버튼 */}
           <hr className="flex w-[100%] my-4 justify-center border-t-2 border-[#47A5A5]" />
           <div className="flex justify-center space-x-4">
-            <button className="px-12 py-2 text-black bg-white border border-gray-400 rounded-lg hover:bg-gray-200 font-['GmarketSans']">
-              홈으로 가기
-            </button>
-            <button className="px-12 py-2 text-black bg-white border border-gray-400 rounded-lg hover:bg-gray-200 font-['GmarketSans']">
-              예약 목록보기
-            </button>
+            <Link to="/">
+              <button className="px-12 py-2 text-black bg-white border border-gray-400 rounded-lg hover:bg-gray-200 font-['GmarketSans']">
+                홈으로 가기
+              </button>
+            </Link>
+            <Link to="/view">
+              <button className="px-12 py-2 text-black bg-white border border-gray-400 rounded-lg hover:bg-gray-200 font-['GmarketSans']">
+                예약 목록보기
+              </button>
+            </Link>
           </div>
         </div>
       </div>
