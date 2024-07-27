@@ -3,6 +3,7 @@ import Nav from "../components/nav";
 import Header from "../components/header";
 import Footer from "../components/footer";
 
+
 export default function Book() {
   return (
     <div>
@@ -27,27 +28,32 @@ export default function Book() {
         <div className="p-6 border border-gray-300 font-['GmarketSans']">
           <div className="mb-8">
             <div className="grid grid-cols-2 gap-4">
-              <div className="flex justify-between pb-2 font-thin ">
+              <div className="flex justify-between pb-2 font-thin">
                 <span className="text-gray-600">이름</span>
-                <span className="font-medium">멋쟁이 사자</span>
-              </div> 
+                <span className="font-medium border-b border-[#E1E1E1]">멋쟁이 사자</span>
+                <hr className="border-gray-300"/>
+              </div>  
               
               <div className="flex justify-between font-thin">
                 <span className="text-gray-600 ">인원</span>
-                <span className="font-medium">2인</span>
+                <span className="font-medium border-b border-[#E1E1E1]">2인</span>
+                <hr className="border-gray-300"/>
 
               </div>
               <div className="flex justify-between font-thin">
                 <span className="text-gray-600">장소</span>
-                <span className="font-medium">서울한방진흥센터</span>
+                <span className="font-medium border-b border-[#E1E1E1]">서울한방진흥센터</span>
+                <hr className="border-gray-300"/>
               </div>
               <div className="flex justify-between font-thin">
                 <span className="text-gray-600 ">날짜/시간</span>
-                <span className="font-medium">2024.08.07</span>
+                <span className="font-medium border-b border-[#E1E1E1]">2024.08.07</span>
+                <hr className="border-gray-300"/>
               </div>
               <div className="flex justify-between font-thin">
                 <span className="text-gray-600">이메일</span>
-                <span className="font-medium">likelion@sungkyul.ac.kr</span>
+                <span className="font-medium border-b border-gray-300">likelion@sungkyul.ac.kr</span>
+                <hr className="border-gray-300 "/>
               </div>
             </div>
           </div>
