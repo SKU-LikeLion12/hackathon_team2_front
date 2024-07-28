@@ -12,6 +12,7 @@ import OrientalMedicine from "./pages/OrientalMedicine";
 import View from "./pages/view";
 import BeautySpa from "./pages/BeautySpa";
 import Book from "./pages/book";
+import Master from "./components/master";
 import Booking from "./pages/booking";
 import Header from "./components/header";
 import Nav from "./components/nav";
@@ -43,6 +44,7 @@ const App = () => {
           <Route path="/detailInfo" element={<DetailInfo />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/scrap" element={<Scrap />} />
+          <Route path="/master" element={<Master />} />
         </Routes>
       </BrowserRouter>
     </div>
