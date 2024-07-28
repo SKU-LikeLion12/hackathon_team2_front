@@ -10,7 +10,8 @@ import NatureForestTherapy from "./pages/NatureForestTherapy";
 import OrientalMedicine from "./pages/OrientalMedicine";
 import View from "./pages/view";
 import BeautySpa from "./pages/BeautySpa";
-import Book from "./pages/book";
+import Book from "./pages/booking";
+import Master from "./components/master";
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/view" element={<View />} />
           <Route path="/beautySpa" element={<BeautySpa />} />
           <Route path="/book" element={<Book />} />
+          <Route path="/master" element={<Master />} />
         </Routes>
       </BrowserRouter>
     </div>
