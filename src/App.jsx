@@ -16,6 +16,7 @@ import Booking from "./pages/booking";
 import Header from "./components/header";
 import Nav from "./components/nav";
 import DetailInfo from "./pages/detailInfo";
+import Scrap from "./pages/scrap";
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="/book" element={<Book />} />
           <Route path="/detailInfo" element={<DetailInfo />} />
           <Route path="/booking" element={<Booking />} />
+          <Route path="/scrap" element={<Scrap />} />
         </Routes>
       </BrowserRouter>
     </div>

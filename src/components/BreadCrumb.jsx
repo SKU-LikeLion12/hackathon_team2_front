@@ -19,6 +19,7 @@ const breadcrumbItems = [
   { label: "뷰티 / 스파", url: "/beautySpa" },
   { label: "상세페이지", url: "/detailInfo" },
   { label: "예약하기", url: "/book" },
+  { label: "스크랩", url: "/scrap" },
 ];
 
 export const AppBreadcrumb = () => {
