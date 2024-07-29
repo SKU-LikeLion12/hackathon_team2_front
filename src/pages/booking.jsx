@@ -74,4 +74,6 @@ export default function Book() {
       <Footer />
     </div>
   );
+
+  
 }
