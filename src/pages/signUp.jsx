@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from "react";
 import axios from "axios";
-import Nav from "../components/nav";
-import Header from "../components/header";
 import Footer from "../components/footer";
 
 const InputField = React.memo(
@@ -183,15 +181,11 @@ export default function SignUp() {
     };
 
     try {
-      const response = await axios.post(
-        "https://localhost:3000/member/signup",
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post("/member/signup", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       console.log("회원가입 성공:", response.data);
       alert("회원가입 성공!");

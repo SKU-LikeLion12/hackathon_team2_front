@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default function Loginui() {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
@@ -15,7 +17,7 @@ export default function Loginui() {
   };
 
   const handleLogin = async () => {
-    const url = "http://localhost:8080/member/login"; // API 엔드포인트
+    const url = `${API_URL}/member/login`; // API 엔드포인트
     const data = {
       userId: id,
       password: pw,
