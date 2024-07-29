@@ -24,6 +24,7 @@ export default function Header() {
               <div>고객센터</div>
             </Link>
             <div>언어</div>
+            <Link to="/scrap">scrap</Link>
           </div>
         </div>
       </div>

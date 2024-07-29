@@ -55,7 +55,7 @@ export default function Nav() {
             브랜드 소개
           </div>
           {activeDropdown === "brand" && (
-            <div className="border-t-4 border-[#499A94] absolute left-1/2 transform -translate-x-1/2 mt-[25px] w-48 bg-[#F8F8F8] text-center font-['GmarketSans-light']">
+            <div className="border-t-4 border-[#499A94] absolute left-1/2 transform -translate-x-1/2 mt-[25px] w-48 bg-[#F8F8F8] text-center font-['GmarketSans-light'] z-[10]">
               <Link
                 to="/wellness"
                 className="block px-4 py-4 my-2 text-gray-800 hover:bg-gray-200 hover:font-['GmarketSans']"
@@ -79,7 +79,7 @@ export default function Nav() {
             테마 소개
           </div>
           {activeDropdown === "theme" && (
-            <div className="border-t-4 border-[#499A94] absolute left-1/2 transform -translate-x-1/2 mt-[25px] w-48 bg-[#F8F8F8] text-center font-['GmarketSans-light']">
+            <div className="border-t-4 border-[#499A94] absolute left-1/2 transform -translate-x-1/2 mt-[25px] w-48 bg-[#F8F8F8] text-center font-['GmarketSans-light'] z-[10]">
               <Link
                 to="/beautySpa"
                 className="block px-4 py-4 my-2 text-gray-800 hover:bg-gray-200 hover:font-['GmarketSans']"
@@ -115,7 +115,7 @@ export default function Nav() {
             예약 안내
           </div>
           {activeDropdown === "reservation" && (
-            <div className="border-t-4 border-[#499A94] absolute left-1/2 transform -translate-x-1/2 mt-[25px] w-48 bg-[#F8F8F8] text-center font-['GmarketSans-light']">
+            <div className="border-t-4 border-[#499A94] absolute left-1/2 transform -translate-x-1/2 mt-[25px] w-48 bg-[#F8F8F8] text-center font-['GmarketSans-light'] z-[10]">
               <Link
                 to="/book"
                 className="block px-4 py-4 my-2 text-gray-800 hover:bg-gray-200 hover:font-['GmarketSans']"
