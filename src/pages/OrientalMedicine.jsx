@@ -119,7 +119,7 @@ export default function OrientalMedicine() {
               <hr className="flex w-[73%] my-4 ml-[14%] border-t border-gray-300" />
             </div>
               
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 mb-[4%]">
               {groupByLocation(13).map(item => (
                 <div key={item.wellnessId}>
                   <img src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`} alt={item.title} />
