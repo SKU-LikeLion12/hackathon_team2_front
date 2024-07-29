@@ -73,7 +73,9 @@ export default function Book() {
           
           {/* 하단 버튼 */}
           <div className="flex justify-center space-x-4">
-            <button className="px-[20%] py-2 text-white bg-[#47A5A5] border border-gray-400 rounded-lg  font-['GmarketSans'] mt-[25%]">홈으로 가기</button>
+            <button className="px-[20%] py-2 text-white bg-[#47A5A5] border border-gray-400 rounded-lg  font-['GmarketSans'] mt-[25%]"
+            onClick={() => window.location.href = 'http://localhost:3000/'}
+            >홈으로 가기</button>
           </div>
         </div>
       </div>
