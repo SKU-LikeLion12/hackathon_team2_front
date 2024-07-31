@@ -15,9 +15,9 @@ export default function wellness() {
           className="relative z-[-20]"
         />
 
-        <div className="absolute text-center bg-[#F8F8F8] rounded-3xl top-[15%] w-[50%] h-[13%] z-[-20]">
-          <h1 className="flex justify-center text-3xl text-center mt-[5%] font-bold">웰니스란?</h1>
-          <p className="mt-[5%]">
+        <div className="absolute text-center bg-white rounded-3xl top-[45%] w-[50%] h-[30%] z-[-20]">
+          <h1 className="flex justify-center mt-8 text-3xl ">웰니스란?</h1>
+          <p className="mt-4">
             웰빙(well-being)과 행복(happiness) 건강(fitness)의 합성어로
             <br /> 신체와 정신은 물론 사회적으로 건강한 상태를 의미합니다.
           </p>
@@ -36,14 +36,14 @@ export default function wellness() {
             신체적, 정신적, 사회적, 환경적 등 건강과 행복을 달성함으로
             극대화하는 개념,
             <br /> 단순히 질병이 없는 상태를 넘어서서 전반적인 삶의 질을
-            향상시키는 것을 목표로 합니다. 
-          </p>                          
-        </div>  
+            향상시키는 것을 목표로 합니다.
+          </p>
+        </div>
 
         <div className="flex justify-center mt-20 mb-10">
           <img
-          src={`${process.env.PUBLIC_URL}/img/donutchart.png`}
-          alt="donutchart"
+            src={`${process.env.PUBLIC_URL}/img/donutchart.png`}
+            alt="dountchart"
           />
         </div>
       </div>
