@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div>
       <Search />
-      <div className="w-[80%] mx-auto flex flex-col p-5 mt-5 border-b-2">
+      <div className="w-[80%] mx-auto flex flex-col p-5 mt-5 border-b-2 relative">
         <div className="mb-4 font-['GmarketSans'] font-medium text-xl">
           추천 장소
         </div>
@@ -21,7 +21,7 @@ export default function Home() {
         </div>
         <SlidePlace />
       </div>
-      <div className="w-[80%] mx-auto flex flex-col p-5 mt-5 justify-center items-center ">
+      <div className="w-[80%] mx-auto flex flex-col p-5 mt-5 mb-8 justify-center items-center ">
         <div className="flex flex-col mb-4 font-['GmarketSans'] text-xl justify-center items-center ">
           <div className="font-medium text-2xl">테마 지도</div>
           <div className="font-['GmarketSans-light'] text-lg font-bold">
@@ -30,7 +30,6 @@ export default function Home() {
         </div>
         <Map />
       </div>
-      <div className="flex justify-center items-center"></div>
       <Footer />
     </div>
   );
