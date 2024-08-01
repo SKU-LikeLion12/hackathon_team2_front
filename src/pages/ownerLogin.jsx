@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Footer from "../components/footer";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -17,7 +18,7 @@ export default function Loginui() {
   };
 
   const handleLogin = async () => {
-    const url = `${API_URL}/member/login`; // API 엔드포인트
+    const url = `${API_URL}/member/SignUpOwnerRequest`; // API 엔드포인트
     const data = {
       userId: id,
       password: pw,
@@ -50,10 +51,11 @@ export default function Loginui() {
   return (
     <div>
       <div className="flex flex-col items-center justify-center p-20">
-        <div className="font-['Pretendard'] text-3xl font-black my-8">
+        <div className="font-['Pretendard'] text-3xl font-black my-8 inline-block align-baseline">
           SHIM_PLE
+          <span className="ml-2 text-2xl text-[#484848]">: 사장님</span>
         </div>
-        <div className="flex flex-col border-2 border-[#a1a1a1] w-[35%] rounded-2xl pt-12 pb-8 px-8">
+        <div className="flex flex-col border-2 border-[#a1a1a1] w-[35%] rounded-2xl py-12 px-8">
           <div className="flex flex-col font-['Pretendard'] text-gray-500">
             <input
               type="text"
@@ -76,12 +78,6 @@ export default function Loginui() {
           >
             로그인
           </button>
-          <div className="flex text-base justify-center mt-5 font-['Pretendard']">
-            사장님이신가요?
-            <Link to="/ownerlogin" className="ml-2 text-blue-600">
-              사장님 로그인 하기
-            </Link>
-          </div>
         </div>
         <div className="flex items-center justify-center">
           <div className="font-['Pretendard'] font-semibold my-8 text-sm mr-3">
@@ -103,6 +99,7 @@ export default function Loginui() {
           </Link>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
