@@ -3,7 +3,6 @@ import Footer from "../components/footer";
 import Map from "../components/map";
 import Search from "../components/search";
 import SlidePlace from "./../components/slidePlace";
-import DetailInfo from "./detailInfo";
 
 export default function Home() {
   return (
