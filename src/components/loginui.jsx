@@ -49,7 +49,7 @@ export default function Loginui() {
 
   return (
     <div>
-      <div className="flex flex-col justify-center items-center p-20">
+      <div className="flex flex-col items-center justify-center p-20">
         <div className="font-['Pretendard'] text-3xl font-black my-8">
           SHIM_PLE
         </div>
@@ -83,7 +83,7 @@ export default function Loginui() {
             </Link>
           </div>
         </div>
-        <div className="flex justify-center items-center">
+        <div className="flex items-center justify-center">
           <div className="font-['Pretendard'] font-semibold my-8 text-sm mr-3">
             비밀번호 찾기
           </div>

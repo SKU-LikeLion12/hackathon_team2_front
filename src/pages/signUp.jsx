@@ -16,8 +16,8 @@ const InputField = React.memo(
     onChange,
     onDuplicateCheck,
   }) => (
-    <div className="flex items-center mb-4 w-full">
-      <label className="w-36 text-left mr-5 flex-shrink-0 flex items-center">
+    <div className="flex items-center w-full mb-4">
+      <label className="flex items-center flex-shrink-0 mr-5 text-left w-36">
         {label}
         <div className="text-[#FF8F8F] text-xl ml-1">*</div>
       </label>
@@ -27,7 +27,7 @@ const InputField = React.memo(
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className="border p-2 w-full"
+        className="w-full p-2 border"
       />
       {(name === "userid" || name === "emailLocalPart") && (
         <button
@@ -43,18 +43,18 @@ const InputField = React.memo(
 
 const EmailInput = React.memo(
   ({ emailLocalPart, emailDomain, onChange, onDuplicateCheck }) => (
-    <div className="flex items-center mb-4 w-full">
-      <label className="w-36 text-left mr-5 flex-shrink-0 flex items-center">
+    <div className="flex items-center w-full mb-4">
+      <label className="flex items-center flex-shrink-0 mr-5 text-left w-36">
         이메일
         <div className="text-[#FF8F8F] text-xl ml-1">*</div>
       </label>
-      <div className="flex-grow flex items-center">
+      <div className="flex items-center flex-grow">
         <input
           type="text"
           name="emailLocalPart"
           value={emailLocalPart}
           onChange={onChange}
-          className="border rounded p-2 w-full"
+          className="w-full p-2 border rounded"
           placeholder="example"
         />
         <span className="mx-2">@</span>
@@ -62,7 +62,7 @@ const EmailInput = React.memo(
           name="emailDomain"
           value={emailDomain}
           onChange={onChange}
-          className="border rounded p-2 w-32"
+          className="w-32 p-2 border rounded"
         >
           <option value="선택">선택하기</option>
           <option value="gmail.com">gmail.com</option>
@@ -81,7 +81,7 @@ const EmailInput = React.memo(
 );
 
 const CheckboxItem = React.memo(({ name, label, checked, onChange }) => (
-  <div className="custom-checkbox flex justify-between w-full">
+  <div className="flex justify-between w-full custom-checkbox">
     <label htmlFor={`checkbox-${name}`} className="flex items-center w-[400px]">
       <input
         type="checkbox"
@@ -90,12 +90,12 @@ const CheckboxItem = React.memo(({ name, label, checked, onChange }) => (
         onChange={onChange}
         className="mr-2"
       />
-      <span className="checkmark flex-shrink-0 mr-2">
+      <span className="flex-shrink-0 mr-2 checkmark">
         <svg viewBox="0 0 20 20" className="w-4 h-4">
           <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
         </svg>
       </span>
-      <span className="label-text flex-grow">{label}</span>
+      <span className="flex-grow label-text">{label}</span>
     </label>
     <div className="ml-4 text-right text-[#47a5a5] cursor-pointer">
       약관보기 &#62;
@@ -180,7 +180,10 @@ export default function SignUp() {
     const email = `${emailLocalPart}@${emailDomain}`;
     const data = {
       userId: userid,
+      userId: userid,
       password,
+      nickName: name,
+      eleMail: email,
       nickName: name,
       eleMail: email,
     };
@@ -193,6 +196,8 @@ export default function SignUp() {
       });
 
       console.log("회원가입 성공:", response.data);
+      login({ name }); // 로그인 상태로 설정하며 사용자 정보를 전달
+      navigate("/"); // 홈 페이지로 리디렉션
       login({ name }); // 로그인 상태로 설정하며 사용자 정보를 전달
       navigate("/"); // 홈 페이지로 리디렉션
     } catch (error) {
@@ -210,14 +215,14 @@ export default function SignUp() {
   return (
     <div>
       <div className="font-['Pretendard'] w-full max-w-2xl mx-auto pb-12">
-        <h2 className="text-2xl font-semibold text-center my-8">회원가입</h2>
-        <div className="w-full h-8 border-b-2 border-black pb-2 mb-8">
+        <h2 className="my-8 text-2xl font-semibold text-center">회원가입</h2>
+        <div className="w-full h-8 pb-2 mb-8 border-b-2 border-black">
           <div className="flex float-right">
             <div className="text-[#FF8F8F] text-2xl mr-1">*</div>필수입력사항
           </div>
         </div>
         <div className="flex justify-center">
-          <form className="space-y-6 w-full" onSubmit={handleSignUp}>
+          <form className="w-full space-y-6" onSubmit={handleSignUp}>
             <InputField
               label="아이디"
               name="userid"
@@ -257,7 +262,7 @@ export default function SignUp() {
             />
             <div className="flex flex-col mt-8 pt-8 border-t-2 border-[#bababa]">
               <div className="flex justify-between mb-4">
-                <label className="w-36 text-left mr-5">이용약관동의</label>
+                <label className="mr-5 text-left w-36">이용약관동의</label>
                 <div className="text-[#FF8F8F] text-xl ml-1">*</div>
               </div>
               <CheckboxItem
@@ -266,7 +271,7 @@ export default function SignUp() {
                 checked={checkboxes.all}
                 onChange={() => handleCheckboxChange("all")}
               />
-              <div className="ml-7 space-y-2">
+              <div className="space-y-2 ml-7">
                 <CheckboxItem
                   name="service"
                   label="이용 약관 동의 (필수)"
@@ -286,6 +291,14 @@ export default function SignUp() {
                   onChange={() => handleCheckboxChange("marketing")}
                 />
               </div>
+            </div>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="bg-[#47a5a5] text-white w-full max-w-[200px] h-14 rounded"
+              >
+                회원가입하기
+              </button>
             </div>
             <div className="flex justify-center">
               <button
