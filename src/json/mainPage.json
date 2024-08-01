@@ -1,0 +1,386 @@
+[
+    {
+        "wellnessId": 1,
+        "location": 3,
+        "theme": 1,
+        "title": "테라피 스파 소베"
+    },
+    {
+        "wellnessId": 2,
+        "location": 1,
+        "theme": 1,
+        "title": "더스파하스타"
+    },
+    {
+        "wellnessId": 3,
+        "location": 7,
+        "theme": 2,
+        "title": "삼척 활기치유의숲"
+    },
+    {
+        "wellnessId": 4,
+        "location": 12,
+        "theme": 2,
+        "title": "국립칠곡 숲체원"
+    },
+    {
+        "wellnessId": 5,
+        "location": 14,
+        "theme": 2,
+        "title": "제원하늘농원"
+    },
+    {
+        "wellnessId": 6,
+        "location": 8,
+        "theme": 2,
+        "title": "국립제천 치유의숲"
+    },
+    {
+        "wellnessId": 7,
+        "location": 7,
+        "theme": 3,
+        "title": "산림힐링재단(하이힐링원)"
+    },
+    {
+        "wellnessId": 8,
+        "location": 13,
+        "theme": 3,
+        "title": "숲애서"
+    },
+    {
+        "wellnessId": 9,
+        "location": 1,
+        "theme": 3,
+        "title": "현대요트 인천"
+    },
+    {
+        "wellnessId": 10,
+        "location": 0,
+        "theme": 0,
+        "title": "티테라피"
+    },
+    {
+        "wellnessId": 11,
+        "location": 0,
+        "theme": 1,
+        "title": "SPA 1899 동인비"
+    },
+    {
+        "wellnessId": 12,
+        "location": 0,
+        "theme": 0,
+        "title": "여용국 한방스파"
+    },
+    {
+        "wellnessId": 13,
+        "location": 0,
+        "theme": 1,
+        "title": "올리바인 스파"
+    },
+    {
+        "wellnessId": 14,
+        "location": 0,
+        "theme": 3,
+        "title": "비스타 워커힐 웰니스 클럽"
+    },
+    {
+        "wellnessId": 15,
+        "location": 0,
+        "theme": 0,
+        "title": "서울한방진흥센터"
+    },
+    {
+        "wellnessId": 16,
+        "location": 0,
+        "theme": 3,
+        "title": "메이필드 호텔서울"
+    },
+    {
+        "wellnessId": 17,
+        "location": 0,
+        "theme": 0,
+        "title": "이문원 한의원"
+    },
+    {
+        "wellnessId": 18,
+        "location": 4,
+        "theme": 1,
+        "title": "스파랜드 센텀시티"
+    },
+    {
+        "wellnessId": 19,
+        "location": 5,
+        "theme": 2,
+        "title": "국립대운산 치유의숲"
+    },
+    {
+        "wellnessId": 20,
+        "location": 2,
+        "theme": 1,
+        "title": "리조트 스파밸리"
+    },
+    {
+        "wellnessId": 21,
+        "location": 2,
+        "theme": 1,
+        "title": "뷰라운지"
+    },
+    {
+        "wellnessId": 22,
+        "location": 1,
+        "theme": 1,
+        "title": "파라다이스시티 씨메르"
+    },
+    {
+        "wellnessId": 23,
+        "location": 1,
+        "theme": 1,
+        "title": "더 스파 앳 파라다이스"
+    },
+    {
+        "wellnessId": 24,
+        "location": 6,
+        "theme": 1,
+        "title": "허브아일랜드 허브 힐링센터"
+    },
+    {
+        "wellnessId": 25,
+        "location": 6,
+        "theme": 1,
+        "title": "아쿠아 필드 고양"
+    },
+    {
+        "wellnessId": 26,
+        "location": 7,
+        "theme": 3,
+        "title": "힐리언스 선마을"
+    },
+    {
+        "wellnessId": 27,
+        "location": 7,
+        "theme": 2,
+        "title": "동해무릉 건강숲"
+    },
+    {
+        "wellnessId": 28,
+        "location": 7,
+        "theme": 3,
+        "title": "파크로쉬 리조트 & 웰니스"
+    },
+    {
+        "wellnessId": 29,
+        "location": 7,
+        "theme": 3,
+        "title": "로미지안 가든"
+    },
+    {
+        "wellnessId": 30,
+        "location": 7,
+        "theme": 2,
+        "title": "하이원 HAO 웰니스"
+    },
+    {
+        "wellnessId": 31,
+        "location": 7,
+        "theme": 3,
+        "title": "뮤지엄 산 명상관"
+    },
+    {
+        "wellnessId": 32,
+        "location": 7,
+        "theme": 2,
+        "title": "용평 리조트 발왕산"
+    },
+    {
+        "wellnessId": 33,
+        "location": 7,
+        "theme": 1,
+        "title": "오색 그린야드 호텔"
+    },
+    {
+        "wellnessId": 34,
+        "location": 7,
+        "theme": 1,
+        "title": "동해보양온천 컨벤션 호텔"
+    },
+    {
+        "wellnessId": 35,
+        "location": 7,
+        "theme": 1,
+        "title": "설해원"
+    },
+    {
+        "wellnessId": 36,
+        "location": 8,
+        "theme": 3,
+        "title": "깊은산속옹달샘 아침편지 명상치유센터"
+    },
+    {
+        "wellnessId": 37,
+        "location": 8,
+        "theme": 1,
+        "title": "포레스트리솜 해브나인 힐링스파"
+    },
+    {
+        "wellnessId": 38,
+        "location": 8,
+        "theme": 3,
+        "title": "좌구산 자연 휴양림"
+    },
+    {
+        "wellnessId": 39,
+        "location": 9,
+        "theme": 2,
+        "title": "팜카밀레"
+    },
+    {
+        "wellnessId": 40,
+        "location": 9,
+        "theme": 1,
+        "title": "파라다이스 스파 도고"
+    },
+    {
+        "wellnessId": 41,
+        "location": 9,
+        "theme": 1,
+        "title": "에덴힐스 뷰티&힐링파크"
+    },
+    {
+        "wellnessId": 42,
+        "location": 10,
+        "theme": 1,
+        "title": "진안 홍삼스파"
+    },
+    {
+        "wellnessId": 43,
+        "location": 10,
+        "theme": 0,
+        "title": "구이안덕 건강힐링 체험마을"
+    },
+    {
+        "wellnessId": 44,
+        "location": 10,
+        "theme": 0,
+        "title": "태권도원 상징지구"
+    },
+    {
+        "wellnessId": 45,
+        "location": 11,
+        "theme": 2,
+        "title": "순천만 국가정원 & 순천만 습지"
+    },
+    {
+        "wellnessId": 46,
+        "location": 11,
+        "theme": 2,
+        "title": "정남진 편백숲 우드랜드"
+    },
+    {
+        "wellnessId": 47,
+        "location": 11,
+        "theme": 1,
+        "title": "태평염전 해양힐링 스파"
+    },
+    {
+        "wellnessId": 48,
+        "location": 11,
+        "theme": 3,
+        "title": "전남권 환경성 질환 예방관리센터"
+    },
+    {
+        "wellnessId": 49,
+        "location": 11,
+        "theme": 2,
+        "title": "국립장성 숲체원"
+    },
+    {
+        "wellnessId": 50,
+        "location": 12,
+        "theme": 2,
+        "title": "국립산림치유원"
+    },
+    {
+        "wellnessId": 51,
+        "location": 12,
+        "theme": 2,
+        "title": "금강송 에코리움"
+    },
+    {
+        "wellnessId": 52,
+        "location": 12,
+        "theme": 3,
+        "title": "인문힐링센터 여명"
+    },
+    {
+        "wellnessId": 53,
+        "location": 12,
+        "theme": 2,
+        "title": "국립김천 치유의숲"
+    },
+    {
+        "wellnessId": 54,
+        "location": 13,
+        "theme": 0,
+        "title": "산청 동의보감촌"
+    },
+    {
+        "wellnessId": 55,
+        "location": 13,
+        "theme": 3,
+        "title": "한화 벨버디어 웰니스"
+    },
+    {
+        "wellnessId": 56,
+        "location": 13,
+        "theme": 0,
+        "title": "하늘호수"
+    },
+    {
+        "wellnessId": 57,
+        "location": 13,
+        "theme": 2,
+        "title": "합천군 오도산 치유의 숲"
+    },
+    {
+        "wellnessId": 58,
+        "location": 13,
+        "theme": 2,
+        "title": "통영시 나폴리 농원"
+    },
+    {
+        "wellnessId": 59,
+        "location": 13,
+        "theme": 2,
+        "title": "거창군 거창 항노화 힐링랜드"
+    },
+    {
+        "wellnessId": 60,
+        "location": 14,
+        "theme": 3,
+        "title": "서귀포시 WE 호텔 웰니스 센터"
+    },
+    {
+        "wellnessId": 61,
+        "location": 14,
+        "theme": 2,
+        "title": "서귀포시 서귀포 치유의 숲"
+    },
+    {
+        "wellnessId": 62,
+        "location": 14,
+        "theme": 3,
+        "title": "취다선 리조트"
+    },
+    {
+        "wellnessId": 63,
+        "location": 14,
+        "theme": 2,
+        "title": "환상숲 곶자왈 공원"
+    },
+    {
+        "wellnessId": 64,
+        "location": 14,
+        "theme": 3,
+        "title": "제주901"
+    }
+]

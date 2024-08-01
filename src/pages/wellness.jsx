@@ -2,14 +2,13 @@ import React from "react";
 import Nav from "../components/nav";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import { AppBreadcrumb } from "../components/BreadCrumb";
 
 export default function wellness() {
   return (
-    <div>
-      <Header />
-      <Nav />
-
+    <div className="relative">
       <div className="flex flex-wrap justify-center font-['GmarketSans']">
+        <AppBreadcrumb />
         <img
           src={`${process.env.PUBLIC_URL}/img/back.png`}
           alt="Background"
@@ -44,7 +43,7 @@ export default function wellness() {
         <div className="flex justify-center mt-20 mb-10">
           <img
             src={`${process.env.PUBLIC_URL}/img/donutchart.png`}
-            alt="Background"
+            alt="dountchart"
           />
         </div>
       </div>

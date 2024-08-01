@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import LogIn from "./pages/logIn";
 import SignUp from "./pages/signUp";
@@ -11,13 +12,19 @@ import OrientalMedicine from "./pages/OrientalMedicine";
 import View from "./pages/view";
 import BeautySpa from "./pages/BeautySpa";
 import Book from "./pages/book";
+import Master from "./components/master";
+import Booking from "./pages/booking";
+import Header from "./components/header";
+import Nav from "./components/nav";
+import DetailInfo from "./pages/detailInfo";
+import Scrap from "./pages/scrap";
 
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter className="flex w-[80%] mx-auto py-4 font-['GmarketSans']">
+        <Header />
+        <Nav className="z-10" />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/logIn" element={<LogIn />} />
@@ -34,10 +41,14 @@ function App() {
           <Route path="/view" element={<View />} />
           <Route path="/beautySpa" element={<BeautySpa />} />
           <Route path="/book" element={<Book />} />
+          <Route path="/detailInfo" element={<DetailInfo />} />
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/scrap" element={<Scrap />} />
+          <Route path="/master" element={<Master />} />
         </Routes>
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

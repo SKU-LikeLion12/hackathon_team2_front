@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react";
-import Nav from "../components/nav";
-import Header from "../components/header";
+import axios from "axios";
 import Footer from "../components/footer";
 
 const InputField = React.memo(
@@ -154,11 +153,58 @@ export default function SignUp() {
     console.log(`Checking duplicate for ${field}`);
   }, []);
 
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
+    const {
+      userid,
+      password,
+      passwordConfirm,
+      name,
+      emailLocalPart,
+      emailDomain,
+      phone,
+    } = formData;
+
+    if (password !== passwordConfirm) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    const email = `${emailLocalPart}@${emailDomain}`;
+    const data = {
+      userid,
+      password,
+      name,
+      email,
+      phone,
+    };
+
+    try {
+      const response = await axios.post("/member/signup", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log("회원가입 성공:", response.data);
+      alert("회원가입 성공!");
+      // 회원가입 성공 후 추가 작업
+    } catch (error) {
+      console.error(
+        "회원가입 실패:",
+        error.response ? error.response.data : error.message
+      );
+      alert(
+        "회원가입 실패: " +
+          (error.response ? error.response.data : error.message)
+      );
+    }
+  };
+
   return (
     <div>
-      <Header />
-      <Nav />
-      <div className="font-['Pretendard'] w-full max-w-2xl mx-auto">
+      <div className="font-['Pretendard'] w-full max-w-2xl mx-auto pb-12">
         <h2 className="text-2xl font-semibold text-center my-8">회원가입</h2>
         <div className="w-full h-8 border-b-2 border-black pb-2 mb-8">
           <div className="flex float-right">
@@ -166,7 +212,7 @@ export default function SignUp() {
           </div>
         </div>
         <div className="flex justify-center">
-          <form className="space-y-6 w-full">
+          <form className="space-y-6 w-full" onSubmit={handleSignUp}>
             <InputField
               label="아이디"
               name="userid"
@@ -204,34 +250,36 @@ export default function SignUp() {
               onChange={handleInputChange}
               onDuplicateCheck={() => handleDuplicateCheck("email")}
             />
-          </form>
-        </div>
-        <div className="mt-8 pt-8">
-          <div className="flex border-t-2 py-8 border-[#bababa] w-full">
-            <div className="w-36 mt-4 mr-4">이용약관동의</div>
-            <div className="checkbox-group flex flex-col space-y-4">
-              {Object.entries(checkboxes).map(([name, checked]) => (
-                <CheckboxItem
-                  key={name}
-                  name={name}
-                  label={
-                    name === "all"
-                      ? "전체 동의합니다"
-                      : name === "service"
-                      ? "서비스 이용약관 동의 (필수)"
-                      : name === "privacy"
-                      ? "개인정보 수집 • 이용 동의 (필수)"
-                      : "마케팅 수신 동의 (선택)"
-                  }
-                  checked={checked}
-                  onChange={() => handleCheckboxChange(name)}
-                />
-              ))}
+            {/* Add more fields as necessary */}
+            <div className="flex flex-col mt-8 pt-8 border-t-2 border-[#bababa]">
+              <div className="w-36 mb-4">이용약관동의</div>
+              <div className="checkbox-group flex flex-col space-y-4">
+                {Object.entries(checkboxes).map(([name, checked]) => (
+                  <CheckboxItem
+                    key={name}
+                    name={name}
+                    label={
+                      name === "all"
+                        ? "전체 동의합니다"
+                        : name === "service"
+                        ? "서비스 이용약관 동의 (필수)"
+                        : name === "privacy"
+                        ? "개인정보 수집 • 이용 동의 (필수)"
+                        : "마케팅 수신 동의 (선택)"
+                    }
+                    checked={checked}
+                    onChange={() => handleCheckboxChange(name)}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-          <button className="w-full h-12 font-medium bg-[#47a5a5] text-white mx-auto mt-12 mb-24">
-            가입하기
-          </button>
+            <button
+              type="submit"
+              className="w-full h-12 font-medium bg-[#47a5a5] text-white mx-auto mt-12 mb-24"
+            >
+              가입하기
+            </button>
+          </form>
         </div>
       </div>
       <Footer />

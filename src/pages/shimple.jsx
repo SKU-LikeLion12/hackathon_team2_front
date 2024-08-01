@@ -1,20 +1,13 @@
 import React from "react";
-import Nav from "../components/nav";
-import Header from "../components/header";
 import Footer from "../components/footer";
+import { AppBreadcrumb } from "../components/BreadCrumb";
 
 export default function shimple() {
   return (
-    <div>
-      <Header />
-      <Nav />
+    <div className="relative">
+      <AppBreadcrumb />
       <div className="bg-[#EAF3EB] flex justify-center font-['GmarketSans']">
-        <div className="w-full max-w-screen-lg px-8 bg-white">
-          {/* 페이지 경로 */}
-          <div className="py-4 text-[#707070]">
-            <span>홈 &gt; 브랜드 소개 &gt; SHIM_PLE 소개</span>
-          </div>
-
+        <div className="w-[80%] px-8 bg-white">
           {/* SHIM_PLE 소개 */}
           <div className="flex justify-center py-8">
             <img

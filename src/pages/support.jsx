@@ -7,10 +7,8 @@ import InquirySection from "../components/InquirySection";
 import PartnershipSection from "../components/PartnershipSection";
 
 export default function Support() {
-  // 현재 선택된 섹션을 관리하는 state를 만듭니다.
   const [selectedSection, setSelectedSection] = useState("notice");
 
-  // 선택된 섹션에 따라 렌더링할 컴포넌트를 결정하는 함수
   const renderSection = () => {
     switch (selectedSection) {
       case "notice":
@@ -26,8 +24,6 @@ export default function Support() {
 
   return (
     <div>
-      <Header />
-      <Nav />
       <div className="flex flex-col items-center font-['GmarketSans']">
         <div className="mt-12 mb-8 text-2xl font-medium">
           무엇을 도와드릴까요?
