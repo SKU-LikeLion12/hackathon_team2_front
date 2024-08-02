@@ -261,9 +261,9 @@ export default function SignUp() {
               onDuplicateCheck={() => handleDuplicateCheck("email")}
             />
             <div className="flex flex-col mt-8 pt-8 border-t-2 border-[#bababa]">
-              <div className="flex justify-between mb-4">
-                <label className="mr-5 text-left w-36">이용약관동의</label>
-                <div className="text-[#FF8F8F] text-xl ml-1">*</div>
+              <div className="flex mb-4">
+                <label className="text-left w-[88px]">이용약관동의</label>
+                <div className="text-[#FF8F8F] text-xl">*</div>
               </div>
               <CheckboxItem
                 name="all"
@@ -286,19 +286,11 @@ export default function SignUp() {
                 />
                 <CheckboxItem
                   name="marketing"
-                  label="무료배송, 할인쿠폰 등 혜택/정보 수신 동의 (선택)"
+                  label="마케팅 수신 동의 (선택)"
                   checked={checkboxes.marketing}
                   onChange={() => handleCheckboxChange("marketing")}
                 />
               </div>
-            </div>
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="bg-[#47a5a5] text-white w-full max-w-[200px] h-14 rounded"
-              >
-                회원가입하기
-              </button>
             </div>
             <div className="flex justify-center">
               <button
