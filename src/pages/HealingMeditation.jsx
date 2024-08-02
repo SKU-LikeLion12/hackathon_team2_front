@@ -9,7 +9,7 @@ export default function OrientalMedicine() {
   const seoulRef = useRef(null);
   const jeonbukRef = useRef(null);
   const gyeongnamRef = useRef(null);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchHanbang = async () => {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Nav from "../components/nav";
-import Header from "../components/header";
+/* import Nav from "../components/nav";
+import Header from "../components/header"; */
 import Footer from "../components/footer";
 
 const API_URL = process.env.REACT_APP_API_URL;

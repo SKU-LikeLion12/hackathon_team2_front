@@ -71,7 +71,7 @@ export default function DetailInfo() {
   return (
     <div className="relative">
       <div className="flex flex-col items-center mx-auto w-[80%] py-12 font-['GmarketSans']">
-        <div className="w-full text-center font-bold text-2xl mb-8">
+        <div className="w-full mb-8 text-2xl font-bold text-center">
           <AppBreadcrumb />
           상호명
         </div>
@@ -145,8 +145,8 @@ export default function DetailInfo() {
             </SwiperSlide>
           </Swiper>
         </div>
-        <div className="w-full text-center mt-8">시설 안내</div>
-        <div className="flex space-x-5 justify-center items-center mt-12">
+        <div className="w-full mt-8 text-center">시설 안내</div>
+        <div className="flex items-center justify-center mt-12 space-x-5">
           <div>좋아요</div>
           <div>리뷰</div>
           <Link to="/book">
@@ -162,8 +162,8 @@ export default function DetailInfo() {
           >
             카카오 지도
           </div>
-          <div className="detailli flex flex-col h-80 ml-10">
-            <ul className="flex flex-col h-full justify-between">
+          <div className="flex flex-col ml-10 detailli h-80">
+            <ul className="flex flex-col justify-between h-full">
               <li className="flex flex-col">
                 <span className="title">오시는 길</span>
                 <div className="description">설명</div>
