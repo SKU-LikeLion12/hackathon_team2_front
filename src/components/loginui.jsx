@@ -30,10 +30,16 @@ export default function Loginui() {
         },
       });
 
-      // 서버로부터 받은 토큰 출력 (나중에 실제 사용)
+      // 서버로부터 받은 토큰과 사용자 이름 출력 (나중에 실제 사용)
       console.log("로그인 성공:", response.data.token);
+      console.log("사용자 이름:", response.data.name);
+
       // 예: localStorage에 토큰 저장
       localStorage.setItem("token", response.data.token);
+
+      // 환영 메시지 표시
+      alert(`${response.data.name}님 환영합니다!`);
+
       // 로그인 성공 후 페이지 이동
       // window.location.href = '/somewhere';
     } catch (error) {
