@@ -23,7 +23,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 export default function DetailInfo() {
   const { id } = useParams();
-  const [detailInfo, setDetailInfo] = useState(null);
+  const [detailInfo, setDetailInfo] = useState("");
 
   useEffect(() => {
     const fetchDetailInfo = async () => {
@@ -61,7 +61,7 @@ export default function DetailInfo() {
         marker.setMap(map);
 
         const iwContent = `
-          <div class="flex flex-col justify-center items-center p-4 ml-6">
+          <div class="flex flex-col justify-center items-center p-4 ml-1">
           ${detailInfo.title}
         </div>`;
         const iwPosition = new kakao.maps.LatLng(
@@ -85,7 +85,7 @@ export default function DetailInfo() {
     <div className="relative">
       <div className="flex flex-col items-center mx-auto w-[80%] py-12 font-['GmarketSans']">
         <div className="w-full text-center font-bold text-2xl mb-8">
-          <AppBreadcrumb />
+          {/* <AppBreadcrumb />  */}
           {detailInfo.title}
           {detailInfo ? detailInfo.name : "Loading..."}
         </div>

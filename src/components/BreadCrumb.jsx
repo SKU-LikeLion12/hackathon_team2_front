@@ -17,7 +17,7 @@ const breadcrumbItems = [
   { label: "한방", url: "/orientalMedicine" },
   { label: "예약 조회", url: "/view" },
   { label: "뷰티 / 스파", url: "/beautySpa" },
-  { label: "상세페이지", url: "/detailInfo" },
+  { label: "상세페이지", url: "/detailInfo/" },
   { label: "예약하기", url: "/book" },
   { label: "스크랩", url: "/scrap" },
 ];
