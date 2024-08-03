@@ -44,17 +44,14 @@ export default function DetailInfo() {
       try {
         const container = document.getElementById("kamap");
         const options = {
-          center: new kakao.maps.LatLng(
-            detailInfo.latitude,
-            detailInfo.longitude
-          ),
+          center: new kakao.maps.LatLng(detailInfo.lati, detailInfo.hard),
           level: 5,
         };
 
         const map = new kakao.maps.Map(container, options);
         const markerPosition = new kakao.maps.LatLng(
-          detailInfo.latitude,
-          detailInfo.longitude
+          detailInfo.lati,
+          detailInfo.hard
         );
 
         const marker = new kakao.maps.Marker({
@@ -64,12 +61,12 @@ export default function DetailInfo() {
         marker.setMap(map);
 
         const iwContent = `
-          <div class="flex flex-col justify-center items-center p-4">
-          ${detailInfo.name}
+          <div class="flex flex-col justify-center items-center p-4 ml-6">
+          ${detailInfo.title}
         </div>`;
         const iwPosition = new kakao.maps.LatLng(
-          detailInfo.latitude,
-          detailInfo.longitude
+          detailInfo.lati,
+          detailInfo.hard
         );
 
         const infowindow = new kakao.maps.InfoWindow({
@@ -89,6 +86,7 @@ export default function DetailInfo() {
       <div className="flex flex-col items-center mx-auto w-[80%] py-12 font-['GmarketSans']">
         <div className="w-full text-center font-bold text-2xl mb-8">
           <AppBreadcrumb />
+          {detailInfo.title}
           {detailInfo ? detailInfo.name : "Loading..."}
         </div>
         <div className="w-full">
@@ -129,7 +127,7 @@ export default function DetailInfo() {
             )}
           </Swiper>
         </div>
-        <div className="w-full text-center mt-8">시설 안내</div>
+        <div className="w-full text-center mt-8">{detailInfo.introduce}</div>
         <div className="flex space-x-5 justify-center items-center mt-12">
           <div>좋아요</div>
           <div>리뷰</div>
@@ -157,19 +155,19 @@ export default function DetailInfo() {
               <li className="flex flex-col">
                 <span className="title">운영시간</span>
                 <div className="description">
-                  {detailInfo ? detailInfo.hours : "Loading..."}
+                  {detailInfo ? detailInfo.workTime : "Loading..."}
                 </div>
               </li>
               <li className="flex flex-col">
                 <span className="title">전화상담 및 문의전화</span>
                 <div className="description">
-                  {detailInfo ? detailInfo.contact : "Loading..."}
+                  {detailInfo ? detailInfo.hp : "Loading..."}
                 </div>
               </li>
               <li className="flex flex-col">
                 <span className="title">링크주소</span>
                 <div className="description">
-                  {detailInfo ? detailInfo.link : "Loading..."}
+                  {detailInfo ? detailInfo.url : "Loading..."}
                 </div>
               </li>
             </ul>
