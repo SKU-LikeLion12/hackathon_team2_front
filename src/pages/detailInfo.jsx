@@ -28,9 +28,8 @@ export default function DetailInfo() {
   useEffect(() => {
     const fetchDetailInfo = async () => {
       try {
-        const response = await axios.get(`${API_URL}/detail/get`, {
-          params: { wellnessId: id },
-        });
+        // URL 경로에 wellnessId를 포함
+        const response = await axios.get(`${API_URL}/detail/get/${id}`);
         setDetailInfo(response.data);
       } catch (error) {
         console.error("Error fetching detail info:", error);
@@ -42,42 +41,46 @@ export default function DetailInfo() {
 
   useEffect(() => {
     if (detailInfo) {
-      const container = document.getElementById("kamap");
-      const options = {
-        center: new kakao.maps.LatLng(
+      try {
+        const container = document.getElementById("kamap");
+        const options = {
+          center: new kakao.maps.LatLng(
+            detailInfo.latitude,
+            detailInfo.longitude
+          ),
+          level: 5,
+        };
+
+        const map = new kakao.maps.Map(container, options);
+        const markerPosition = new kakao.maps.LatLng(
           detailInfo.latitude,
           detailInfo.longitude
-        ),
-        level: 5,
-      };
+        );
 
-      const map = new kakao.maps.Map(container, options);
-      const markerPosition = new kakao.maps.LatLng(
-        detailInfo.latitude,
-        detailInfo.longitude
-      );
+        const marker = new kakao.maps.Marker({
+          position: markerPosition,
+        });
 
-      const marker = new kakao.maps.Marker({
-        position: markerPosition,
-      });
+        marker.setMap(map);
 
-      marker.setMap(map);
+        const iwContent = `
+          <div class="flex flex-col justify-center items-center p-4">
+          ${detailInfo.name}
+        </div>`;
+        const iwPosition = new kakao.maps.LatLng(
+          detailInfo.latitude,
+          detailInfo.longitude
+        );
 
-      const iwContent = `
-        <div class="flex flex-col justify-center items-center p-4">
-        ${detailInfo.name}
-      </div>`;
-      const iwPosition = new kakao.maps.LatLng(
-        detailInfo.latitude,
-        detailInfo.longitude
-      );
+        const infowindow = new kakao.maps.InfoWindow({
+          position: iwPosition,
+          content: iwContent,
+        });
 
-      const infowindow = new kakao.maps.InfoWindow({
-        position: iwPosition,
-        content: iwContent,
-      });
-
-      infowindow.open(map, marker);
+        infowindow.open(map, marker);
+      } catch (error) {
+        console.error("Error initializing Kakao map:", error);
+      }
     }
   }, [detailInfo]);
 
@@ -106,7 +109,7 @@ export default function DetailInfo() {
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             style={{ height: "400px" }}
           >
-            {detailInfo ? (
+            {detailInfo && detailInfo.images && detailInfo.images.length > 0 ? (
               detailInfo.images.map((image, index) => (
                 <SwiperSlide
                   key={index}
@@ -121,7 +124,7 @@ export default function DetailInfo() {
               ))
             ) : (
               <SwiperSlide style={{ backgroundColor: "gray" }}>
-                Loading...
+                {detailInfo ? "No images available" : "Loading..."}
               </SwiperSlide>
             )}
           </Swiper>
