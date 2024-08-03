@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/footer";
 import { AppBreadcrumb } from "../components/BreadCrumb";
 import "primeicons/primeicons.css";
 import { Paginator } from "primereact/paginator";
+import { useAuth } from "../components/AuthContext";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -11,6 +13,8 @@ export default function Scrap() {
   const [first, setFirst] = useState(0);
   const [rows, setRows] = useState(10);
   const [scrapData, setScrapData] = useState([]);
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const onPageChange = (event) => {
     setFirst(event.first);
@@ -20,7 +24,8 @@ export default function Scrap() {
   const fetchScrapData = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("로그인이 필요합니다.");
+      alert("로그인이 필요합니다!");
+      navigate("/login");
       return;
     }
 
@@ -38,8 +43,13 @@ export default function Scrap() {
   };
 
   useEffect(() => {
+    if (!user) {
+      alert("로그인이 필요합니다!");
+      navigate("/login");
+      return;
+    }
     fetchScrapData();
-  }, []);
+  }, [user, navigate]);
 
   return (
     <div className="relative flex flex-col items-center font-['GmarketSans']">
@@ -54,7 +64,11 @@ export default function Scrap() {
         {scrapData.length > 0 ? (
           scrapData.slice(first, first + rows).map((scrap, index) => (
             <div key={index} className="mb-4">
-              <img src={scrap.imageUrl || ""} alt="" className="w-64 bg-gray-200 h-52" />
+              <img
+                src={scrap.imageUrl || ""}
+                alt=""
+                className="w-64 bg-gray-200 h-52"
+              />
               <div className="flex items-center justify-between p-3">
                 <div>{scrap.title}</div>
                 <i className="justify-end pb-2 text-sm text-center pi pi-thumbs-up-fill">

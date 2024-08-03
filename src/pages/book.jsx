@@ -7,6 +7,7 @@ import { locale, addLocale } from "primereact/api";
 import { InputNumber } from "primereact/inputnumber";
 import { InputTextarea } from "primereact/inputtextarea";
 import "primeicons/primeicons.css";
+import { useAuth } from "../components/AuthContext"; // useAuth 훅 임포트
 
 const { kakao } = window;
 
@@ -166,6 +167,14 @@ export default function Book() {
   const [value, setValue] = useState("");
 
   const navigate = useNavigate();
+  const { user } = useAuth(); // 로그인 상태 확인
+
+  useEffect(() => {
+    if (!user) {
+      alert("로그인이 필요합니다!");
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
   const navigateToPage = (path) => {
     navigate(path);

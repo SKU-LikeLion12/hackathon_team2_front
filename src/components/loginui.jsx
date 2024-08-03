@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../components/AuthContext";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export default function Loginui() {
+export default function Login() {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleId = (e) => {
     setId(e.target.value);
@@ -17,7 +20,7 @@ export default function Loginui() {
   };
 
   const handleLogin = async () => {
-    const url = `${API_URL}/member/login`; // API 엔드포인트
+    const url = `${API_URL}/member/login`;
     const data = {
       userId: id,
       password: pw,
@@ -30,12 +33,11 @@ export default function Loginui() {
         },
       });
 
-      // 서버로부터 받은 토큰 출력 (나중에 실제 사용)
-      console.log("로그인 성공:", response.data.token);
-      // 예: localStorage에 토큰 저장
       localStorage.setItem("token", response.data.token);
-      // 로그인 성공 후 페이지 이동
-      // window.location.href = '/somewhere';
+      login({ userId: id }); // 로그인 상태 업데이트
+
+      alert(`${response.data.name}님 환영합니다!`);
+      navigate("/");
     } catch (error) {
       console.error(
         "로그인 실패:",

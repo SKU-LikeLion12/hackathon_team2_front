@@ -1,11 +1,62 @@
-import React from "react";
-import Nav from "../components/nav";
-import Header from "../components/header";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/footer";
+import { useAuth } from "../components/AuthContext"; // useAuth 훅 임포트
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 export default function View() {
+  const [bookings, setBookings] = useState([]);
+  const navigate = useNavigate();
+  const { user } = useAuth(); // 로그인 상태 확인
+
+  useEffect(() => {
+    if (!user) {
+      alert("로그인이 필요합니다!");
+      navigate("/login");
+      return;
+    }
+
+    const fetchBookings = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        const redirect = window.confirm(
+          "로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?"
+        );
+        if (redirect) {
+          navigate("/login"); // 로그인 페이지로 리디렉션
+        }
+        return;
+      }
+
+      try {
+        const response = await axios.get(`${API_URL}/book/myPage`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setBookings(response.data);
+      } catch (error) {
+        console.error("API 요청 실패:", error);
+        if (error.response && error.response.status === 401) {
+          // 토큰이 유효하지 않은 경우
+          alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
+          localStorage.removeItem("token");
+          navigate("/login");
+        } else {
+          alert("예약 정보를 불러오지 못했습니다. 다시 시도해주세요.");
+        }
+      }
+    };
+
+    fetchBookings();
+  }, [user, navigate]);
+
   return (
     <div>
+      {/* <Header />
+      <Nav /> */}
       <div className="flex items-center justify-center min-h-screen mt-4">
         <div className="w-full max-w-2xl bg-white">
           <div className="mb-8 text-center">
@@ -33,81 +84,65 @@ export default function View() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
-                    3
-                  </td>
-                  <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center ">
-                    여용국 한방스파
-                  </td>
-                  <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
-                    2024.08.07
-                  </td>
-                  <td className="font-['GmarketSans'] border border-gray-300 p-2 text-center relative">
-                    <div className="relative">
-                      <div>수락</div>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/img/o.png`}
-                        className="absolute transform -translate-x-1/2 -translate-y-1/2 top-3 left-1/2"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
-                    2
-                  </td>
-                  <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
-                    티테라피
-                  </td>
-                  <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
-                    2024.07.20
-                  </td>
-                  <td className="font-['GmarketSans'] border border-gray-300 p-2 text-center relative">
-                    <div className="relative">
-                      <div>대기</div>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/img/triangle.png`}
-                        className="absolute transform -translate-x-1/2 -translate-y-1/2 top-3 left-1/2"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                <td className="font-['GmarketSans'] font-thin border border-b-2 border-b-gray-500  border-gray-300 p-2 text-center">
-                    1
-                  </td>
-                  <td className="font-['GmarketSans'] font-thin border border-b-2 border-b-gray-500 border-gray-300 p-2 text-center">
-                    서울한방진흥센터
-                  </td>
-                  <td className="font-['GmarketSans'] font-thin border border-b-2 border-b-gray-500 border-gray-300 p-2 text-center">
-                    2024.07.14
-                  </td>
-                  <td className="font-['GmarketSans'] border border-b-2 border-b-gray-500 border-gray-300 p-2 text-center relative">
-                    <div className="relative">
-                      <div>취소</div>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/img/x.png`}
-                        className="absolute transform -translate-x-1/2 -translate-y-1/2 top-3 left-1/2"
-                      />
-                    </div>
-                  </td>
-                </tr>
+                {bookings.length > 0 ? (
+                  bookings.map((booking, index) => (
+                    <tr key={index}>
+                      <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
+                        {index + 1}
+                      </td>
+                      <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center ">
+                        {booking.title}
+                      </td>
+                      <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
+                        {booking.checkIn}
+                      </td>
+                      <td className="font-['GmarketSans'] border border-gray-300 p-2 text-center relative">
+                        <div className="relative">
+                          <div>
+                            {booking.isBook === 1
+                              ? "수락"
+                              : booking.isBook === 0
+                              ? "대기"
+                              : "취소"}
+                          </div>
+                          {/* <img
+                            src={`${process.env.PUBLIC_URL}/img/${booking.isBook === 1 ? 'o' : booking.isBook === 0 ? 'triangle' : 'x'}.png`}
+                            className="absolute transform -translate-x-1/2 -translate-y-1/2 top-3 left-1/2"
+                          /> */}
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan="4"
+                      className="font-['GmarketSans'] text-center p-4"
+                    >
+                      예약한 내역이 없습니다.
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
-          
+
           <div className="relative flex items-center justify-center">
             <div className="absolute font-['GmarketSans']">1</div>
-            <img src={`${process.env.PUBLIC_URL}/img/next.png`} className="flex justify-center " />
+            <img
+              src={`${process.env.PUBLIC_URL}/img/next.png`}
+              className="flex justify-center "
+            />
           </div>
 
-          
           {/* 하단 버튼 */}
           <div className="flex justify-center space-x-4">
-            <button className="px-[20%] py-2 text-white bg-[#47A5A5] border border-gray-400 rounded-lg  font-['GmarketSans'] mt-[25%]"
-            onClick={() => window.location.href = 'http://localhost:3000/'}
-            >홈으로 가기</button>
+            <button
+              className="px-[20%] py-2 text-white bg-[#47A5A5] border border-gray-400 rounded-lg  font-['GmarketSans'] mt-[25%]"
+              onClick={() => (window.location.href = "/")}
+            >
+              홈으로 가기
+            </button>
           </div>
         </div>
       </div>
