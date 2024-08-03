@@ -34,8 +34,8 @@ export default function OrientalMedicine() {
     }
   };
 
-  const navigateToPage = (path) => {
-    navigate(path);
+  const navigateToPage = (path, id) => {
+    navigate(`${path}/${id}`);
   };
 
   return (
@@ -111,7 +111,7 @@ export default function OrientalMedicine() {
                       src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`}
                       alt={item.title}
                       onClick={() => {
-                        navigateToPage("/detailInfo");
+                        navigateToPage("/detailInfo", item.wellnessId);
                       }}
                       className="cursor-pointer"
                     />
@@ -142,7 +142,7 @@ export default function OrientalMedicine() {
                     src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`}
                     alt={item.title}
                     onClick={() => {
-                      navigateToPage("/detailInfo");
+                      navigateToPage("/detailInfo", item.wellnessId);
                     }}
                     className="cursor-pointer"
                   />
@@ -172,7 +172,7 @@ export default function OrientalMedicine() {
                     src={`${process.env.PUBLIC_URL}/location/wellness${item.wellnessId}.png`}
                     alt={item.title}
                     onClick={() => {
-                      navigateToPage("/detailInfo");
+                      navigateToPage("/detailInfo", item.wellnessId);
                     }}
                     className="cursor-pointer"
                   />
