@@ -23,14 +23,13 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 export default function DetailInfo() {
   const { id } = useParams();
-  const [detailInfo, setDetailInfo] = useState(null);
+  const [detailInfo, setDetailInfo] = useState("");
 
   useEffect(() => {
     const fetchDetailInfo = async () => {
       try {
-        const response = await axios.get(`${API_URL}/detail/get`, {
-          params: { wellnessId: id },
-        });
+        // URL 경로에 wellnessId를 포함
+        const response = await axios.get(`${API_URL}/detail/get/${id}`);
         setDetailInfo(response.data);
       } catch (error) {
         console.error("Error fetching detail info:", error);
@@ -42,42 +41,43 @@ export default function DetailInfo() {
 
   useEffect(() => {
     if (detailInfo) {
-      const container = document.getElementById("kamap");
-      const options = {
-        center: new kakao.maps.LatLng(
-          detailInfo.latitude,
-          detailInfo.longitude
-        ),
-        level: 5,
-      };
+      try {
+        const container = document.getElementById("kamap");
+        const options = {
+          center: new kakao.maps.LatLng(detailInfo.lati, detailInfo.hard),
+          level: 5,
+        };
 
-      const map = new kakao.maps.Map(container, options);
-      const markerPosition = new kakao.maps.LatLng(
-        detailInfo.latitude,
-        detailInfo.longitude
-      );
+        const map = new kakao.maps.Map(container, options);
+        const markerPosition = new kakao.maps.LatLng(
+          detailInfo.lati,
+          detailInfo.hard
+        );
 
-      const marker = new kakao.maps.Marker({
-        position: markerPosition,
-      });
+        const marker = new kakao.maps.Marker({
+          position: markerPosition,
+        });
 
-      marker.setMap(map);
+        marker.setMap(map);
 
-      const iwContent = `
-        <div class="flex flex-col justify-center items-center p-4">
-        ${detailInfo.name}
-      </div>`;
-      const iwPosition = new kakao.maps.LatLng(
-        detailInfo.latitude,
-        detailInfo.longitude
-      );
+        const iwContent = `
+          <div class="flex flex-col justify-center items-center p-4 ml-1">
+          ${detailInfo.title}
+        </div>`;
+        const iwPosition = new kakao.maps.LatLng(
+          detailInfo.lati,
+          detailInfo.hard
+        );
 
-      const infowindow = new kakao.maps.InfoWindow({
-        position: iwPosition,
-        content: iwContent,
-      });
+        const infowindow = new kakao.maps.InfoWindow({
+          position: iwPosition,
+          content: iwContent,
+        });
 
-      infowindow.open(map, marker);
+        infowindow.open(map, marker);
+      } catch (error) {
+        console.error("Error initializing Kakao map:", error);
+      }
     }
   }, [detailInfo]);
 
@@ -85,7 +85,8 @@ export default function DetailInfo() {
     <div className="relative">
       <div className="flex flex-col items-center mx-auto w-[80%] py-12 font-['GmarketSans']">
         <div className="w-full text-center font-bold text-2xl mb-8">
-          <AppBreadcrumb />
+          {/* <AppBreadcrumb />  */}
+          {detailInfo.title}
           {detailInfo ? detailInfo.name : "Loading..."}
         </div>
         <div className="w-full">
@@ -106,7 +107,7 @@ export default function DetailInfo() {
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             style={{ height: "400px" }}
           >
-            {detailInfo ? (
+            {detailInfo && detailInfo.images && detailInfo.images.length > 0 ? (
               detailInfo.images.map((image, index) => (
                 <SwiperSlide
                   key={index}
@@ -121,12 +122,12 @@ export default function DetailInfo() {
               ))
             ) : (
               <SwiperSlide style={{ backgroundColor: "gray" }}>
-                Loading...
+                {detailInfo ? "No images available" : "Loading..."}
               </SwiperSlide>
             )}
           </Swiper>
         </div>
-        <div className="w-full text-center mt-8">시설 안내</div>
+        <div className="w-full text-center mt-8">{detailInfo.introduce}</div>
         <div className="flex space-x-5 justify-center items-center mt-12">
           <div>좋아요</div>
           <div>리뷰</div>
@@ -154,19 +155,19 @@ export default function DetailInfo() {
               <li className="flex flex-col">
                 <span className="title">운영시간</span>
                 <div className="description">
-                  {detailInfo ? detailInfo.hours : "Loading..."}
+                  {detailInfo ? detailInfo.workTime : "Loading..."}
                 </div>
               </li>
               <li className="flex flex-col">
                 <span className="title">전화상담 및 문의전화</span>
                 <div className="description">
-                  {detailInfo ? detailInfo.contact : "Loading..."}
+                  {detailInfo ? detailInfo.hp : "Loading..."}
                 </div>
               </li>
               <li className="flex flex-col">
                 <span className="title">링크주소</span>
                 <div className="description">
-                  {detailInfo ? detailInfo.link : "Loading..."}
+                  {detailInfo ? detailInfo.url : "Loading..."}
                 </div>
               </li>
             </ul>
