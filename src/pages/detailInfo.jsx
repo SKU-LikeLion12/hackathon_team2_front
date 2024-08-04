@@ -24,6 +24,8 @@ const API_URL = process.env.REACT_APP_API_URL;
 export default function DetailInfo() {
   const { id } = useParams();
   const [detailInfo, setDetailInfo] = useState("");
+  const [mainPage, setMainPage] = useState("");
+  const [locationNumber, setLocationNumber] = useState(null); // location 번호를 저장할 상태 추가
 
   useEffect(() => {
     const fetchDetailInfo = async () => {
@@ -37,6 +39,33 @@ export default function DetailInfo() {
     };
 
     fetchDetailInfo();
+  }, [id]);
+
+  useEffect(() => {
+    const fetchMainPage = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/mainPage`);
+        const mainPageData = response.data;
+
+        setMainPage(response.data);
+        console.log(response.data);
+
+        const matchedData = mainPageData.find(
+          (item) => item.wellness_id === parseInt(id)
+        );
+        console.log("Matched data:", matchedData);
+
+        if (matchedData) {
+          setLocationNumber(matchedData.location); // 매칭된 데이터의 location 번호를 상태로 저장
+        } else {
+          console.log("No matching wellness_id found.");
+        }
+      } catch (error) {
+        console.error("Error fetching main Page:", error);
+      }
+    };
+
+    fetchMainPage();
   }, [id]);
 
   useEffect(() => {
@@ -85,7 +114,6 @@ export default function DetailInfo() {
     <div className="relative">
       <div className="flex flex-col items-center mx-auto w-[80%] py-12 font-['GmarketSans']">
         <div className="w-full text-center font-bold text-2xl mb-8">
-          {/* <AppBreadcrumb />  */}
           {detailInfo.title}
           {detailInfo ? detailInfo.name : "Loading..."}
         </div>
@@ -107,24 +135,38 @@ export default function DetailInfo() {
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             style={{ height: "400px" }}
           >
-            {detailInfo && detailInfo.images && detailInfo.images.length > 0 ? (
-              detailInfo.images.map((image, index) => (
-                <SwiperSlide
-                  key={index}
-                  className="slide"
-                  style={{
-                    backgroundImage: `url(${image})`,
-                    backgroundSize: "cover",
-                  }}
-                >
-                  Slide {index + 1}
-                </SwiperSlide>
-              ))
-            ) : (
-              <SwiperSlide style={{ backgroundColor: "gray" }}>
-                {detailInfo ? "No images available" : "Loading..."}
-              </SwiperSlide>
-            )}
+            <SwiperSlide
+              className="slide"
+              style={{
+                backgroundImage: `url(${process.env.PUBLIC_URL}/img/resourceEnd/${locationNumber}/${id}/1.png)`,
+                backgroundSize: "cover",
+                backgroundColor: "gray",
+              }}
+            ></SwiperSlide>
+            <SwiperSlide
+              className="slide"
+              style={{
+                backgroundImage: `url(${process.env.PUBLIC_URL}/img/resourceEnd/${locationNumber}/${id}/2.png)`,
+                backgroundSize: "cover",
+                backgroundColor: "gray",
+              }}
+            ></SwiperSlide>
+            <SwiperSlide
+              className="slide"
+              style={{
+                backgroundImage: `url(${process.env.PUBLIC_URL}/img/resourceEnd/${locationNumber}/${id}/3.png)`,
+                backgroundSize: "cover",
+                backgroundColor: "gray",
+              }}
+            ></SwiperSlide>
+            <SwiperSlide
+              className="slide"
+              style={{
+                backgroundImage: `url(${process.env.PUBLIC_URL}/img/resourceEnd/${locationNumber}/${id}/4.png)`,
+                backgroundSize: "cover",
+                backgroundColor: "gray",
+              }}
+            ></SwiperSlide>
           </Swiper>
         </div>
         <div className="w-full text-center mt-8">{detailInfo.introduce}</div>
@@ -168,6 +210,12 @@ export default function DetailInfo() {
                 <span className="title">링크주소</span>
                 <div className="description">
                   {detailInfo ? detailInfo.url : "Loading..."}
+                </div>
+              </li>
+              <li className="flex flex-col">
+                <span className="title">Location 번호</span>
+                <div className="description">
+                  {locationNumber !== null ? locationNumber : "Loading..."}
                 </div>
               </li>
             </ul>
