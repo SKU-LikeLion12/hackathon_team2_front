@@ -51,8 +51,14 @@ export default function View() {
           }
         );
         console.log("예약 데이터: ", response.data);
-        setBookings(response.data);
-        setPaginatedBookings(response.data.slice(first, first + rows)); // 초기 데이터 설정
+
+        // 최신순으로 정렬 (예약일 기준)
+        const sortedBookings = response.data.sort(
+          (a, b) => new Date(b.checkIn) - new Date(a.checkIn)
+        );
+
+        setBookings(sortedBookings);
+        setPaginatedBookings(sortedBookings.slice(first, first + rows)); // 초기 데이터 설정
       } catch (error) {
         console.error("API 요청 실패:", error);
         if (error.response && error.response.status === 401) {
@@ -66,11 +72,15 @@ export default function View() {
     };
 
     fetchBookings();
-  }, [user, navigate]);
+  }, [user, navigate, first, rows]);
 
   useEffect(() => {
     setPaginatedBookings(bookings.slice(first, first + rows));
   }, [first, rows, bookings]);
+
+  const handlePlaceClick = (id) => {
+    navigate(`/booking/${id}`);
+  };
 
   return (
     <div>
@@ -105,9 +115,12 @@ export default function View() {
                   paginatedBookings.map((booking, index) => (
                     <tr key={index}>
                       <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
-                        {first + index + 1}
+                        {bookings.length - first - index} {/* 최신순 번호 */}
                       </td>
-                      <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
+                      <td
+                        className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center cursor-pointer text-blue-500"
+                        onClick={() => handlePlaceClick(booking.id)}
+                      >
                         {booking.title}
                       </td>
                       <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
@@ -153,7 +166,7 @@ export default function View() {
           {/* 하단 버튼 */}
           <div className="flex justify-center space-x-4">
             <button
-              className="px-[20%] py-2 text-white bg-[#47A5A5] border border-gray-400 rounded-lg  font-['GmarketSans'] mt-[25%]"
+              className="px-[20%] py-2 text-white bg-[#47A5A5] border border-gray-400 rounded-lg font-['GmarketSans'] mt-[25%]"
               onClick={() => (window.location.href = "/")}
             >
               홈으로 가기

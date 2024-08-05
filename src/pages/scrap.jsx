@@ -44,6 +44,12 @@ export default function Scrap() {
       setScrapData(response.data);
     } catch (error) {
       console.error("스크랩 데이터를 가져오는 데 실패했습니다:", error);
+      if (error.response) {
+        console.error("서버 응답 오류:", error.response.data);
+        console.error("서버 응답 상태:", error.response.status);
+      } else {
+        console.error("네트워크 오류:", error.message);
+      }
       alert("스크랩 데이터를 가져오는 데 실패했습니다.");
     }
   };
