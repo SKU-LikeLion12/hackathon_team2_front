@@ -30,9 +30,10 @@ export default function Scrap() {
     }
 
     try {
+      console.log("사용자 토큰:", token);
       const response = await axios.post(
         `${API_URL}/scrap/myPage`,
-        {},
+        { token },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -72,7 +73,7 @@ export default function Scrap() {
       <button className="border-b-2 border-[#E1E1E1] w-[70%] flex justify-end text-sm mt-12 px-12 text-[#656565]">
         편집
       </button>
-      <div className="p-12">
+      <div className="p-12 flex space-x-4">
         {scrapData.length > 0 ? (
           scrapData.slice(first, first + rows).map((scrap, index) => (
             <div key={index} className="mb-4">
@@ -97,7 +98,7 @@ export default function Scrap() {
         first={first}
         rows={rows}
         totalRecords={scrapData.length}
-        rowsPerPageOptions={[5, 10]}
+        rowsPerPageOptions={[3, 5]}
         onPageChange={onPageChange}
         className="mt-4 mb-8"
       />

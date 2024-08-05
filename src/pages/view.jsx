@@ -52,13 +52,12 @@ export default function View() {
         );
         console.log("예약 데이터: ", response.data);
 
-        // 최신순으로 정렬 (예약일 기준)
         const sortedBookings = response.data.sort(
           (a, b) => new Date(b.checkIn) - new Date(a.checkIn)
         );
 
         setBookings(sortedBookings);
-        setPaginatedBookings(sortedBookings.slice(first, first + rows)); // 초기 데이터 설정
+        setPaginatedBookings(sortedBookings.slice(first, first + rows));
       } catch (error) {
         console.error("API 요청 실패:", error);
         if (error.response && error.response.status === 401) {
@@ -72,14 +71,15 @@ export default function View() {
     };
 
     fetchBookings();
-  }, [user, navigate, first, rows]);
+  }, [user, navigate]);
 
   useEffect(() => {
     setPaginatedBookings(bookings.slice(first, first + rows));
   }, [first, rows, bookings]);
 
-  const handlePlaceClick = (id) => {
-    navigate(`/booking/${id}`);
+  const handlePlaceClick = (bookId) => {
+    console.log("Navigating to booking ID:", bookId);
+    navigate(`/booking/${bookId}`);
   };
 
   return (
@@ -91,7 +91,6 @@ export default function View() {
             <hr className="flex justify-center my-8 border-t border-gray-300" />
           </div>
 
-          {/* 예약 정보 */}
           <div className="flex justify-center mb-8">
             <table className="w-full border-collapse border-gray-300 table-auto">
               <thead>
@@ -115,11 +114,11 @@ export default function View() {
                   paginatedBookings.map((booking, index) => (
                     <tr key={index}>
                       <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
-                        {bookings.length - first - index} {/* 최신순 번호 */}
+                        {bookings.length - (first + index)}
                       </td>
                       <td
                         className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center cursor-pointer text-blue-500"
-                        onClick={() => handlePlaceClick(booking.id)}
+                        onClick={() => handlePlaceClick(booking.bookId)}
                       >
                         {booking.title}
                       </td>
@@ -163,11 +162,10 @@ export default function View() {
             className="mt-4 mb-8"
           />
 
-          {/* 하단 버튼 */}
           <div className="flex justify-center space-x-4">
             <button
               className="px-[20%] py-2 text-white bg-[#47A5A5] border border-gray-400 rounded-lg font-['GmarketSans'] mt-[25%]"
-              onClick={() => (window.location.href = "/")}
+              onClick={() => navigate("/")}
             >
               홈으로 가기
             </button>
