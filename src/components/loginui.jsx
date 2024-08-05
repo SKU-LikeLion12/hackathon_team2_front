@@ -27,7 +27,7 @@ export default function Login() {
           "Content-Type": "application/json",
         },
       });
-
+      
       const token = response.data.token;
       const name = response.data.nickName;
       console.log(response.data);

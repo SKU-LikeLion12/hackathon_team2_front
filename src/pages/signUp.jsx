@@ -8,15 +8,7 @@ import Footer from "../components/footer";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const InputField = React.memo(
-  ({
-    label,
-    name,
-    placeholder,
-    type = "text",
-    value,
-    onChange,
-    onDuplicateCheck,
-  }) => (
+  ({ label, name, placeholder, type = "text", value, onChange, onDuplicateCheck }) => (
     <div className="flex items-center w-full mb-4">
       <label className="flex items-center flex-shrink-0 mr-5 text-left w-36">
         {label}
@@ -206,8 +198,9 @@ export default function SignUp() {
         password,
       });
 
+
       const { token } = loginResponse.data;
-      login({ name }, token); // 로그인 상태로 설정하며 사용자 정보를 전달 및 token 저장
+      login({ name }, token); // 로그인 상태로 설정하며 사용자 정보를 전달 및 token 저
       navigate("/"); // 홈 페이지로 리디렉션
     } catch (error) {
       console.error(
