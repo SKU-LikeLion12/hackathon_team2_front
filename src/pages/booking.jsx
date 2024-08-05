@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Footer from "../components/footer";
 import { Link } from "react-router-dom";
+import { useUser } from "../contexts/UserContext";
+
+// Mock function to simulate fetching reservation data
+const fetchReservationData = (id) => {
+  return {
+    people: "2인",
+    dateTime: "2024.08.07",
+    place: "서울한방진흥센터",
+    query: "",
+  };
+};
 
 export default function Booking() {
+  const { id } = useParams();
+  const { user } = useUser(); // Context에서 사용자 정보 가져오기
+  const [reservation, setReservation] = useState({});
+
+  useEffect(() => {
+    const data = fetchReservationData(id);
+    setReservation(data);
+  }, [id]);
+
   return (
     <div>
       <div className="flex items-center justify-center min-h-screen">
@@ -20,40 +41,40 @@ export default function Booking() {
             <div className="mb-8">
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex justify-between pb-2 font-thin">
-                  <span className="text-gray-600">이름</span>
+                  <span className="text-gray-600">닉네임</span>
                   <span className="font-medium border-b border-[#E1E1E1]">
-                    멋쟁이 사자
+                    {user.nickName}
                   </span>
                   <hr className="border-gray-300" />
                 </div>
 
                 <div className="flex justify-between font-thin">
+                  <span className="text-gray-600">이메일</span>
+                  <span className="font-medium border-b border-[#E1E1E1]">
+                    {user.eleMail}
+                  </span>
+                  <hr className="border-gray-300" />
+                </div>
+                <div className="flex justify-between font-thin">
                   <span className="text-gray-600 ">인원</span>
                   <span className="font-medium border-b border-[#E1E1E1]">
-                    2인
+                    {reservation.people}
                   </span>
                   <hr className="border-gray-300" />
                 </div>
                 <div className="flex justify-between font-thin">
                   <span className="text-gray-600">장소</span>
                   <span className="font-medium border-b border-[#E1E1E1]">
-                    서울한방진흥센터
+                    {reservation.place}
                   </span>
                   <hr className="border-gray-300" />
                 </div>
                 <div className="flex justify-between font-thin">
                   <span className="text-gray-600 ">날짜/시간</span>
                   <span className="font-medium border-b border-[#E1E1E1]">
-                    2024.08.07
+                    {reservation.dateTime}
                   </span>
                   <hr className="border-gray-300" />
-                </div>
-                <div className="flex justify-between font-thin">
-                  <span className="text-gray-600">이메일</span>
-                  <span className="font-medium border-b border-gray-300">
-                    likelion@sungkyul.ac.kr
-                  </span>
-                  <hr className="border-gray-300 " />
                 </div>
               </div>
             </div>
@@ -62,7 +83,11 @@ export default function Booking() {
               <span className="text-gray-600 font-['GmarketSans'] font-thin">
                 문의내용
               </span>
-              <textarea className="w-full p-8 mt-2 border border-gray-300"></textarea>
+              <textarea
+                className="w-full p-8 mt-2 border border-gray-300"
+                value={reservation.query}
+                readOnly
+              ></textarea>
             </div>
           </div>
           {/* 하단 버튼 */}
