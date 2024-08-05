@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../components/AuthContext"; // AuthContext를 import 합니다.
+import { useAuth } from "../contexts/AuthContext"; // AuthContext를 import 합니다.
 import axios from "axios";
 import Footer from "../components/footer";
 

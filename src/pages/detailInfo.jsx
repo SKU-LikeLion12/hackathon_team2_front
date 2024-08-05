@@ -212,12 +212,6 @@ export default function DetailInfo() {
                   {detailInfo ? detailInfo.url : "Loading..."}
                 </div>
               </li>
-              <li className="flex flex-col">
-                <span className="title">Location 번호</span>
-                <div className="description">
-                  {locationNumber !== null ? locationNumber : "Loading..."}
-                </div>
-              </li>
             </ul>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../components/AuthContext"; // AuthContext를 import 합니다.
+import { useAuth } from "../contexts/AuthContext"; // AuthContext를 import 합니다.
 
 export default function Header() {
   const { user, logout } = useAuth(); // AuthContext에서 user와 logout을 가져옵니다.

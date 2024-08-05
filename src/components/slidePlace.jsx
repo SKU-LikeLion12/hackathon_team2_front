@@ -1,4 +1,3 @@
-// src/components/slidePlace.jsx
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
@@ -15,7 +14,23 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-const SlidePlace = () => {
+const SlidePlace = ({ places }) => {
+  // 랜덤으로 장소 데이터 배열을 섞는 함수
+  const shuffleArray = (array) => {
+    let shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
+    }
+    return shuffledArray;
+  };
+
+  // 섞인 배열에서 처음 6개의 장소를 선택
+  const randomPlaces = shuffleArray(places).slice(0, 6);
+
   return (
     <div className="max-w-full">
       <Swiper
@@ -23,65 +38,22 @@ const SlidePlace = () => {
         spaceBetween={30}
         slidesPerView={3}
         navigation
-        // pagination={{ clickable: true }}
-        // scrollbar={{ draggable: true }}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
       >
-        {/* 얘도 동적으로 처리해서 나중에는 mockData 삭제하고 DB로 받아오기 */}
-        <SwiperSlide>
-          <div className="h-64 bg-red-500 flex items-center justify-center text-white">
-            Slide 1
-          </div>
-          <div className="flex flex-col m-1">
-            <div className="font-['GmarketSans-light'] mb-1">지역</div>
-            <div className="font-['GmarketSans'] text-lg">장소</div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="h-64 bg-green-500 flex items-center justify-center text-white">
-            Slide 2
-          </div>
-          <div className="flex flex-col m-1">
-            <div className="font-['GmarketSans-light'] mb-1">지역</div>
-            <div className="font-['GmarketSans'] text-lg">장소</div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="h-64 bg-blue-500 flex items-center justify-center text-white">
-            Slide 3
-          </div>
-          <div className="flex flex-col m-1">
-            <div className="font-['GmarketSans-light'] mb-1">지역</div>
-            <div className="font-['GmarketSans'] text-lg">장소</div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="h-64 bg-yellow-500 flex items-center justify-center text-white">
-            Slide 4
-          </div>
-          <div className="flex flex-col m-1">
-            <div className="font-['GmarketSans-light'] mb-1">지역</div>
-            <div className="font-['GmarketSans'] text-lg">장소</div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="h-64 bg-purple-500 flex items-center justify-center text-white">
-            Slide 5
-          </div>
-          <div className="flex flex-col m-1">
-            <div className="font-['GmarketSans-light'] mb-1">지역</div>
-            <div className="font-['GmarketSans'] text-lg">장소</div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="h-64 bg-pink-500 flex items-center justify-center text-white">
-            Slide 6
-          </div>
-          <div className="flex flex-col m-1">
-            <div className="font-['GmarketSans-light'] mb-1">지역</div>
-            <div className="font-['GmarketSans'] text-lg">장소</div>
-          </div>
-        </SwiperSlide>
+        {randomPlaces.map((place) => (
+          <SwiperSlide key={place.wellnessId}>
+            <div className="flex items-center justify-center h-64">
+              <img
+                src={`${process.env.PUBLIC_URL}/img/resourceEnd/${place.location}/${place.wellnessId}/1.png`} //아마자 추가 해야됨
+                alt={place.title}
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <div className="flex flex-col m-1">
+              <div className="font-['GmarketSans'] text-lg">{place.title}</div>
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
