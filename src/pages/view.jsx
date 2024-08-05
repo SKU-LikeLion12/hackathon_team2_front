@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/footer";
-import { useAuth } from "../components/AuthContext"; // useAuth 훅 임포트
+import { useAuth } from "../contexts/AuthContext"; // useAuth 훅 임포트
 
 const API_URL = process.env.REACT_APP_API_URL;
 

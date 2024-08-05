@@ -7,7 +7,7 @@ import { locale, addLocale } from "primereact/api";
 import { InputNumber } from "primereact/inputnumber";
 import { InputTextarea } from "primereact/inputtextarea";
 import "primeicons/primeicons.css";
-import { useAuth } from "../components/AuthContext"; // useAuth 훅 임포트
+import { useAuth } from "../contexts/AuthContext"; // useAuth 훅 임포트
 
 const { kakao } = window;
 

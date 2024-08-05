@@ -5,7 +5,7 @@ import Footer from "../components/footer";
 import { AppBreadcrumb } from "../components/BreadCrumb";
 import "primeicons/primeicons.css";
 import { Paginator } from "primereact/paginator";
-import { useAuth } from "../components/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
