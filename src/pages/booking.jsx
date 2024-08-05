@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 
 export default function Booking() {
   const { id } = useParams();
+  
   return (
     <div>
       <div className="flex items-center justify-center min-h-screen">
@@ -21,13 +22,19 @@ export default function Booking() {
             <div className="mb-8">
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex justify-between pb-2 font-thin">
+                  <span className="text-gray-600">예약 ID</span>
+                  <span className="font-medium border-b border-[#E1E1E1]">
+                    {id}
+                  </span>
+                  <hr className="border-gray-300" />
+                </div>
+                <div className="flex justify-between pb-2 font-thin">
                   <span className="text-gray-600">이름</span>
                   <span className="font-medium border-b border-[#E1E1E1]">
                     멋쟁이 사자
                   </span>
                   <hr className="border-gray-300" />
                 </div>
-
                 <div className="flex justify-between font-thin">
                   <span className="text-gray-600 ">인원</span>
                   <span className="font-medium border-b border-[#E1E1E1]">

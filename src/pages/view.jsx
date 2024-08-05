@@ -31,12 +31,14 @@ export default function View() {
       }
 
       try {
-        const response = await axios.get(`${API_URL}/book/myPage`, {
+        const response = await axios.post(`${API_URL}/book/myPage`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `${token}`,
+            'Content-Type': 'application/json'
           },
         });
         setBookings(response.data);
+        console.log("요거: ", response);
       } catch (error) {
         console.error("API 요청 실패:", error);
         if (error.response && error.response.status === 401) {
@@ -55,8 +57,6 @@ export default function View() {
 
   return (
     <div>
-      {/* <Header />
-      <Nav /> */}
       <div className="flex items-center justify-center min-h-screen mt-4">
         <div className="w-full max-w-2xl bg-white">
           <div className="mb-8 text-center">
@@ -91,10 +91,10 @@ export default function View() {
                         {index + 1}
                       </td>
                       <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center ">
-                        {booking.title}
+                        {booking.place}
                       </td>
                       <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
-                        {booking.checkIn}
+                        {booking.dateTime}
                       </td>
                       <td className="font-['GmarketSans'] border border-gray-300 p-2 text-center relative">
                         <div className="relative">
@@ -105,10 +105,7 @@ export default function View() {
                               ? "대기"
                               : "취소"}
                           </div>
-                          {/* <img
-                            src={`${process.env.PUBLIC_URL}/img/${booking.isBook === 1 ? 'o' : booking.isBook === 0 ? 'triangle' : 'x'}.png`}
-                            className="absolute transform -translate-x-1/2 -translate-y-1/2 top-3 left-1/2"
-                          /> */}
+                          <p className="hidden">{booking.bookId}</p>
                         </div>
                       </td>
                     </tr>
@@ -129,10 +126,10 @@ export default function View() {
 
           <div className="relative flex items-center justify-center">
             <div className="absolute font-['GmarketSans']">1</div>
-            <img
+            {/* <img
               src={`${process.env.PUBLIC_URL}/img/next.png`}
               className="flex justify-center "
-            />
+            /> */}
           </div>
 
           {/* 하단 버튼 */}
