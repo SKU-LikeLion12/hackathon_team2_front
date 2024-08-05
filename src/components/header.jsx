@@ -20,7 +20,7 @@ export default function Header() {
             </>
           ) : (
             <>
-              <div>{`${user.name}님 환영합니다!`}</div>
+              <div>{`${user.nickName}님 환영합니다!`}</div>
               <button onClick={logout} className="text-[#47a5a5]">
                 로그아웃
               </button>
