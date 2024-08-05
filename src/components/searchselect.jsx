@@ -9,6 +9,31 @@ export default function SearchSelect() {
   const [selectedTheme, setSelectedTheme] = useState("");
   const navigate = useNavigate();
 
+  const locationMapping = {
+    0: "서울특별시",
+    1: "인천광역시",
+    2: "대구광역시",
+    3: "광주광역시",
+    4: "부산광역시",
+    5: "울산광역시",
+    6: "경기도",
+    7: "강원특별자치도",
+    8: "충청북도",
+    9: "충청남도",
+    10: "전북특별자치도",
+    11: "전라남도",
+    12: "경상북도",
+    13: "경상남도",
+    14: "제주특별자치도",
+  };
+
+  const themeMapping = {
+    0: "한방",
+    1: "뷰티 / 스파",
+    2: "자연 / 숲 치유",
+    3: "힐링 / 명상",
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,13 +58,13 @@ export default function SearchSelect() {
   const themeToPath = (theme) => {
     switch (theme) {
       case 0:
-        return "/beautySpa";
-      case 1:
-        return "/natureForestTherapy";
-      case 2:
-        return "/healingMeditation";
-      case 3:
         return "/orientalMedicine";
+      case 1:
+        return "/beautySpa";
+      case 2:
+        return "/natureForestTherapy";
+      case 3:
+        return "/healingMeditation";
       default:
         return "/";
     }
@@ -47,7 +72,7 @@ export default function SearchSelect() {
 
   const handleSearch = () => {
     if (selectedLocation && selectedTheme !== "") {
-      const path = themeToPath(selectedTheme);
+      const path = themeToPath(parseInt(selectedTheme));
       navigate(`${path}?location=${selectedLocation}`);
     } else {
       alert("지역과 테마를 모두 선택해주세요.");
@@ -62,21 +87,21 @@ export default function SearchSelect() {
         className="mr-5 w-[40%] h-10 p-2 font-['GmarketSans-light'] text-sm font-light"
       >
         <option value="">지역을 선택해주세요.</option>
-        {locations.map((location, index) => (
-          <option key={index} value={location}>
-            {location}
+        {Object.entries(locationMapping).map(([key, value]) => (
+          <option key={key} value={key}>
+            {value}
           </option>
         ))}
       </select>
       <select
         value={selectedTheme}
-        onChange={(e) => setSelectedTheme(parseInt(e.target.value))}
+        onChange={(e) => setSelectedTheme(e.target.value)}
         className="mr-5 w-[40%] h-10 p-2 font-['GmarketSans-light'] text-sm font-light"
       >
         <option value="">테마를 선택해주세요.</option>
-        {themes.map((theme, index) => (
-          <option key={index} value={index}>
-            {theme}
+        {Object.entries(themeMapping).map(([key, value]) => (
+          <option key={key} value={key}>
+            {value}
           </option>
         ))}
       </select>

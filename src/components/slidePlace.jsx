@@ -1,5 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useNavigate } from "react-router-dom";
 import {
   Navigation,
   Pagination,
@@ -15,6 +16,8 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 const SlidePlace = ({ places }) => {
+  const navigate = useNavigate();
+
   // 랜덤으로 장소 데이터 배열을 섞는 함수
   const shuffleArray = (array) => {
     let shuffledArray = [...array];
@@ -31,6 +34,10 @@ const SlidePlace = ({ places }) => {
   // 섞인 배열에서 처음 6개의 장소를 선택
   const randomPlaces = shuffleArray(places).slice(0, 6);
 
+  const navigateToPage = (path, id) => {
+    navigate(`${path}/${id}`);
+  };
+
   return (
     <div className="max-w-full">
       <Swiper
@@ -46,7 +53,10 @@ const SlidePlace = ({ places }) => {
               <img
                 src={`${process.env.PUBLIC_URL}/img/resourceEnd/${place.location}/${place.wellnessId}/1.png`} //아마자 추가 해야됨
                 alt={place.title}
-                className="object-cover w-full h-full"
+                className="object-cover w-full h-full cursor-pointer"
+                onClick={() => {
+                  navigateToPage("/detailInfo", place.wellnessId);
+                }}
               />
             </div>
             <div className="flex flex-col m-1">
