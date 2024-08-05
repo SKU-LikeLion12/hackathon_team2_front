@@ -124,6 +124,7 @@ export default function Book() {
   const [people, setPeople] = useState(null);
   const [value, setValue] = useState("");
   const [placeData, setPlaceData] = useState(null);
+  const [reservationDataArray, setReservationDataArray] = useState([]); // 예약 데이터를 저장할 배열 상태
 
   const navigate = useNavigate();
   const { user } = useAuth(); // useAuth에서 user 받아오기
@@ -228,6 +229,9 @@ export default function Book() {
     };
 
     console.log("Reservation Data:", reservationData);
+
+    // 예약 데이터를 배열에 추가
+    setReservationDataArray([...reservationDataArray, reservationData]);
 
     try {
       const response = await axios.post(`${API_URL}/book`, reservationData);

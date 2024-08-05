@@ -31,14 +31,17 @@ export default function View() {
       }
 
       try {
-        const response = await axios.post(`${API_URL}/book/myPage`, {
-          headers: {
-            Authorization: `${token}`,
-            'Content-Type': 'application/json'
-          },
-        });
-        setBookings(response.data);
-        console.log("요거: ", response);
+        const response = await axios.post(
+          `${API_URL}/book/myPage`,
+          { token: token }, // 요청 본문에 토큰 포함
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+        console.log("예약 데이터: ", response.data); // 서버에서 반환된 전체 데이터 확인
+        setBookings(response.data); // 데이터를 올바르게 설정
       } catch (error) {
         console.error("API 요청 실패:", error);
         if (error.response && error.response.status === 401) {
@@ -84,17 +87,17 @@ export default function View() {
                 </tr>
               </thead>
               <tbody>
-                {bookings.length > 0 ? (
+                {bookings && bookings.length > 0 ? (
                   bookings.map((booking, index) => (
                     <tr key={index}>
                       <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
                         {index + 1}
                       </td>
                       <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center ">
-                        {booking.place}
+                        {booking.title} {/* 서버에서 반환된 데이터의 키 확인 */}
                       </td>
                       <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
-                        {booking.dateTime}
+                        {booking.checkIn} {/* 서버에서 반환된 데이터의 키 확인 */}
                       </td>
                       <td className="font-['GmarketSans'] border border-gray-300 p-2 text-center relative">
                         <div className="relative">
