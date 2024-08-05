@@ -2,14 +2,21 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/footer";
 import onePunch from "../json/onePunch";
+import "primeicons/primeicons.css";
+import { useAuth } from "../contexts/AuthContext";
+import axios from "axios";
 
 export default function OrientalMedicine() {
   const [hanbang, setHanbang] = useState([]);
   const [selectedRegion, setSelectedRegion] = useState("서울");
+  const [bookmarkedItems, setBookmarkedItems] = useState({});
   const seoulRef = useRef(null);
   const jeonbukRef = useRef(null);
   const gyeongnamRef = useRef(null);
   const navigate = useNavigate();
+  const { user } = useAuth(); // AuthContext에서 user 가져오기
+
+  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchHanbang = async () => {
@@ -31,6 +38,42 @@ export default function OrientalMedicine() {
     setSelectedRegion(region);
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleIconClick = async (id) => {
+    if (!user) {
+      alert("로그인 후 북마크를 할 수 있습니다.");
+      return;
+    }
+
+    const isBookmarked = !bookmarkedItems[id];
+    setBookmarkedItems((prev) => ({
+      ...prev,
+      [id]: isBookmarked,
+    }));
+
+    if (isBookmarked) {
+      try {
+        const response = await axios.post(`${API_URL}/scrap/add`, {
+          token: user.token,
+          wellnessId: id,
+        });
+
+        console.log("북마크 추가 성공:", response.data);
+      } catch (error) {
+        console.error(
+          "북마크 추가 실패:",
+          error.response ? error.response.data : error.message
+        );
+        alert("북마크 추가 실패");
+        console.error("북마크 추가 실패:", error);
+        // 북마크 실패 시 상태 롤백
+        setBookmarkedItems((prev) => ({
+          ...prev,
+          [id]: !isBookmarked,
+        }));
+      }
     }
   };
 
@@ -115,8 +158,20 @@ export default function OrientalMedicine() {
                       }}
                       className="cursor-pointer"
                     />
-                    <div className="font-['GmarketSans'] mt-[8px]">
-                      {item.title}
+                    <div className="flex justify-between">
+                      <div className="font-['GmarketSans'] mt-[8px]">
+                        {item.title}
+                      </div>
+                      <div
+                        onClick={() => handleIconClick(item.wellnessId)}
+                        className="cursor-pointer"
+                      >
+                        {bookmarkedItems[item.wellnessId] ? (
+                          <i className="py-2 text-base text-center pi pi-bookmark-fill" />
+                        ) : (
+                          <i className="py-2 text-base text-center pi pi-bookmark" />
+                        )}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -146,8 +201,20 @@ export default function OrientalMedicine() {
                     }}
                     className="cursor-pointer"
                   />
-                  <div className="font-['GmarketSans'] mt-[8px]">
-                    {item.title}
+                  <div className="flex justify-between">
+                    <div className="font-['GmarketSans'] mt-[8px]">
+                      {item.title}
+                    </div>
+                    <div
+                      onClick={() => handleIconClick(item.wellnessId)}
+                      className="cursor-pointer"
+                    >
+                      {bookmarkedItems[item.wellnessId] ? (
+                        <i className="py-2 text-base text-center pi pi-bookmark-fill" />
+                      ) : (
+                        <i className="py-2 text-base text-center pi pi-bookmark" />
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -176,8 +243,20 @@ export default function OrientalMedicine() {
                     }}
                     className="cursor-pointer"
                   />
-                  <div className="font-['GmarketSans'] mt-[8px]">
-                    {item.title}
+                  <div className="flex justify-between">
+                    <div className="font-['GmarketSans'] mt-[8px]">
+                      {item.title}
+                    </div>
+                    <div
+                      onClick={() => handleIconClick(item.wellnessId)}
+                      className="cursor-pointer"
+                    >
+                      {bookmarkedItems[item.wellnessId] ? (
+                        <i className="py-2 text-base text-center pi pi-bookmark-fill" />
+                      ) : (
+                        <i className="py-2 text-base text-center pi pi-bookmark" />
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}

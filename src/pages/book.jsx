@@ -233,7 +233,7 @@ export default function Book() {
       const response = await axios.post(`${API_URL}/book`, reservationData);
       if (response.status === 201) {
         alert("예약이 성공적으로 완료되었습니다.");
-        navigate("/booking");
+        navigate("/view");
       } else {
         alert("예약에 실패하였습니다. 다시 시도해주세요.");
       }

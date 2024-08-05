@@ -30,11 +30,17 @@ export default function Scrap() {
     }
 
     try {
-      const response = await axios.get(`${API_URL}/scrap/myPage`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post(
+        `${API_URL}/scrap/myPage`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // 서버 응답 데이터 확인
+      console.log("스크랩 데이터:", response.data);
       setScrapData(response.data);
     } catch (error) {
       console.error("스크랩 데이터를 가져오는 데 실패했습니다:", error);
@@ -65,14 +71,14 @@ export default function Scrap() {
           scrapData.slice(first, first + rows).map((scrap, index) => (
             <div key={index} className="mb-4">
               <img
-                src={scrap.imageUrl || ""}
-                alt=""
+                src={`${process.env.PUBLIC_URL}/img/resourceEnd/${scrap.location}/${scrap.wellness_id}/1.png`} // 이미지 URL을 실제로 변경
+                alt={scrap.title}
                 className="w-64 bg-gray-200 h-52"
               />
               <div className="flex items-center justify-between p-3">
                 <div>{scrap.title}</div>
                 <i className="justify-end pb-2 text-sm text-center pi pi-thumbs-up-fill">
-                  {scrap.likeCount}
+                  {scrap.likeCount || 0}
                 </i>
               </div>
             </div>
