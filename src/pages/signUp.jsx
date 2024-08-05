@@ -1,6 +1,7 @@
+// SignUp.js
 import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext"; // AuthContext를 import 합니다.
+import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
 import Footer from "../components/footer";
 
@@ -121,7 +122,7 @@ export default function SignUp() {
     marketing: false,
   });
 
-  const { login } = useAuth(); // AuthContext에서 login 함수를 가져옵니다.
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleInputChange = useCallback((e) => {
@@ -173,11 +174,18 @@ export default function SignUp() {
     } = formData;
 
     if (password !== passwordConfirm) {
-      alert("Passwords do not match!");
+      alert("비밀번호가 일치하지 않습니다!");
       return;
     }
 
-    const email = `${emailLocalPart}@${emailDomain}`;
+    const email =
+      emailDomain !== "선택" ? `${emailLocalPart}@${emailDomain}` : "";
+
+    if (!userid || !password || !passwordConfirm || !name || !email) {
+      alert("모든 필수 입력 사항을 입력해 주세요.");
+      return;
+    }
+
     const data = {
       userId: userid,
       password,
@@ -193,9 +201,14 @@ export default function SignUp() {
       });
 
       console.log("회원가입 성공:", response.data);
-      login({ name }); // 로그인 상태로 설정하며 사용자 정보를 전달
-      navigate("/"); // 홈 페이지로 리디렉션
-      login({ name }); // 로그인 상태로 설정하며 사용자 정보를 전달
+      // 로그인 API 호출
+      const loginResponse = await axios.post(`${API_URL}/member/login`, {
+        userId: userid,
+        password,
+      });
+
+      const { token } = loginResponse.data;
+      login({ name }, token); // 로그인 상태로 설정하며 사용자 정보를 전달 및 token 저장
       navigate("/"); // 홈 페이지로 리디렉션
     } catch (error) {
       console.error(
