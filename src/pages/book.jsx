@@ -13,7 +13,6 @@ import axios from "axios";
 const { kakao } = window;
 const API_URL = process.env.REACT_APP_API_URL;
 
-// PrimeReact 한국어 로케일 설정
 addLocale("ko", {
   firstDayOfWeek: 1,
   dayNames: [
@@ -59,9 +58,8 @@ addLocale("ko", {
   clear: "초기화",
 });
 
-locale("ko"); // 기본 로케일을 한국어로 설정
+locale("ko");
 
-// 커스텀 시간 선택기 컴포넌트
 const CustomTimePicker = ({ onTimeChange }) => {
   const hours = Array.from({ length: 12 }, (_, i) =>
     (i + 1).toString().padStart(2, "0")
@@ -128,7 +126,7 @@ export default function Book() {
   const [placeData, setPlaceData] = useState(null);
 
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, token } = useAuth(); // useAuth에서 token도 받아오기
 
   useEffect(() => {
     if (!user) {
@@ -203,6 +201,11 @@ export default function Book() {
   };
 
   const handleReservation = async () => {
+    if (!token) {
+      alert("토큰이 없습니다. 로그인이 필요합니다.");
+      return;
+    }
+
     const [selectedAmpm, selectedHour, selectedMinute] = time
       .split(/시|분| /)
       .filter(Boolean);
@@ -213,7 +216,7 @@ export default function Book() {
         : parseInt(selectedHour);
 
     const reservationData = {
-      token: user.token, // Assuming user.token is available from useAuth context
+      token, // token을 직접 사용
       wellnessId: parseInt(id),
       content: value,
       headCnt: people,
@@ -228,7 +231,7 @@ export default function Book() {
 
     try {
       const response = await axios.post(`${API_URL}/book`, reservationData);
-      if (response.status === 200) {
+      if (response.status === 201) {
         alert("예약이 성공적으로 완료되었습니다.");
         navigateToPage("/booking");
       } else {

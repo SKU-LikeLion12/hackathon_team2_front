@@ -11,13 +11,9 @@ export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleId = (e) => {
-    setId(e.target.value);
-  };
+  const handleId = (e) => setId(e.target.value);
 
-  const handlePw = (e) => {
-    setPw(e.target.value);
-  };
+  const handlePw = (e) => setPw(e.target.value);
 
   const handleLogin = async () => {
     const url = `${API_URL}/member/login`;
@@ -33,10 +29,11 @@ export default function Login() {
         },
       });
 
-      localStorage.setItem("token", response.data.token);
-      login({ userId: id }); // 로그인 상태 업데이트
+      const { token, name } = response.data;
+      localStorage.setItem("token", token);
+      login({ userId: id }, token); // Pass token to login function
 
-      alert(`${response.data.name}님 환영합니다!`);
+      alert(`${name}님 환영합니다!`);
       navigate("/");
     } catch (error) {
       console.error(
