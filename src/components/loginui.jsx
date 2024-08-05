@@ -16,20 +16,20 @@ export default function Login() {
   const handlePw = (e) => setPw(e.target.value);
 
   const handleLogin = async () => {
-    const url = `${API_URL}/member/login`;
     const data = {
       userId: id,
       password: pw,
     };
 
     try {
-      const response = await axios.post(url, data, {
+      const response = await axios.post(`${API_URL}/member/login`, data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
       const { token, name } = response.data;
+      // console.log(response.data)
       localStorage.setItem("token", token);
       login({ userId: id }, token); // Pass token to login function
 
@@ -77,7 +77,7 @@ export default function Login() {
           </button>
           <div className="flex text-base justify-center mt-5 font-['Pretendard']">
             사장님이신가요?
-            <Link to="/ownerlogin" className="text-blue-600 ml-2">
+            <Link to="/ownerlogin" className="ml-2 text-blue-600">
               사장님 로그인 하기
             </Link>
           </div>
