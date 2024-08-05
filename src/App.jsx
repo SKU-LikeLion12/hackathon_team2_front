@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { SearchProvider } from "./contexts/SearchContext";
+import { UserProvider } from "./contexts/UserContext";
 import Home from "./pages/home";
 import LogIn from "./pages/logIn";
 import SignUp from "./pages/signUp";
@@ -26,37 +27,33 @@ const App = () => {
   return (
     <AuthProvider>
       <SearchProvider>
-        <div className="App">
-          <BrowserRouter className="flex w-[80%] mx-auto py-4 font-['GmarketSans']">
-            <Header />
-            <Nav className="z-10" />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/logIn" element={<LogIn />} />
-              <Route path="/signUp" element={<SignUp />} />
-              <Route path="/support" element={<Support />} />
-              <Route path="/wellness" element={<Wellness />} />
-              <Route path="/shimple" element={<Shimple />} />
-              <Route
-                path="/healingMeditation"
-                element={<HealingMeditation />}
-              />
-              <Route
-                path="/natureForestTherapy"
-                element={<NatureForestTherapy />}
-              />
-              <Route path="/orientalMedicine" element={<OrientalMedicine />} />
-              <Route path="/view" element={<View />} />
-              <Route path="/beautySpa" element={<BeautySpa />} />
-              <Route path="/book/:id" element={<Book />} />
-              <Route path="/detailInfo/:id" element={<DetailInfo />} />
-              <Route path="/booking" element={<Booking />} />
-              <Route path="/scrap" element={<Scrap />} />
-              <Route path="/master" element={<Master />} />
-              <Route path="/ownerlogin" element={<OwnerLogin />} />
-            </Routes>
-          </BrowserRouter>
-        </div>
+        <UserProvider>
+          <div className="App">
+            <BrowserRouter className="flex w-[80%] mx-auto py-4 font-['GmarketSans']">
+              <Header />
+              <Nav className="z-10" />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/logIn" element={<LogIn />} />
+                <Route path="/signUp" element={<SignUp />} />
+                <Route path="/support" element={<Support />} />
+                <Route path="/wellness" element={<Wellness />} />
+                <Route path="/shimple" element={<Shimple />} />
+                <Route path="/healingMeditation" element={<HealingMeditation />} />
+                <Route path="/natureForestTherapy" element={<NatureForestTherapy />} />
+                <Route path="/orientalMedicine" element={<OrientalMedicine />} />
+                <Route path="/view" element={<View />} />
+                <Route path="/beautySpa" element={<BeautySpa />} />
+                <Route path="/book" element={<Book />} />
+                <Route path="/detailInfo/:id" element={<DetailInfo />} />
+                <Route path="/booking/:reservationId" element={<Booking />} />
+                <Route path="/scrap" element={<Scrap />} />
+                <Route path="/master" element={<Master />} />
+                <Route path="/ownerlogin" element={<OwnerLogin />} />
+              </Routes>
+            </BrowserRouter>
+          </div>
+        </UserProvider>
       </SearchProvider>
     </AuthProvider>
   );
