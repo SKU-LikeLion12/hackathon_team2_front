@@ -1,4 +1,3 @@
-// SignUp.js
 import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -170,7 +169,6 @@ export default function SignUp() {
       name,
       emailLocalPart,
       emailDomain,
-      phone,
     } = formData;
 
     if (password !== passwordConfirm) {
@@ -190,25 +188,27 @@ export default function SignUp() {
       userId: userid,
       password,
       nickName: name,
-      eleMail: email,
+      email,
     };
 
     try {
-      const response = await axios.post(`${API_URL}/member/signUp`, data, {
+      // 회원가입
+      await axios.post(`${API_URL}/member/signUp`, data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      console.log("회원가입 성공:", response.data);
-      // 로그인 API 호출
+      console.log("회원가입 성공");
+
+      // 로그인
       const loginResponse = await axios.post(`${API_URL}/member/login`, {
         userId: userid,
-        password,
+        password, // 비밀번호 전달 수정
       });
 
       const { token } = loginResponse.data;
-      login({ name }, token); // 로그인 상태로 설정하며 사용자 정보를 전달 및 token 저장
+      login({ nickName: name }, token); // 로그인 상태로 설정하며 사용자 정보를 전달 및 token 저장
       navigate("/"); // 홈 페이지로 리디렉션
     } catch (error) {
       console.error(

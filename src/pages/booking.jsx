@@ -15,14 +15,14 @@ const fetchReservationData = (id) => {
 };
 
 export default function Booking() {
-  const { reservationId } = useParams();
+  const { id } = useParams();
   const { user } = useUser(); // Context에서 사용자 정보 가져오기
   const [reservation, setReservation] = useState({});
 
   useEffect(() => {
-    const data = fetchReservationData(reservationId);
+    const data = fetchReservationData(id);
     setReservation(data);
-  }, [reservationId]);
+  }, [id]);
 
   return (
     <div>
