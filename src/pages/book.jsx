@@ -126,7 +126,7 @@ export default function Book() {
   const [placeData, setPlaceData] = useState(null);
 
   const navigate = useNavigate();
-  const { user, token } = useAuth(); // useAuth에서 token도 받아오기
+  const { user } = useAuth(); // useAuth에서 user 받아오기
 
   useEffect(() => {
     if (!user) {
@@ -201,7 +201,7 @@ export default function Book() {
   };
 
   const handleReservation = async () => {
-    if (!token) {
+    if (!user?.token) {
       alert("토큰이 없습니다. 로그인이 필요합니다.");
       return;
     }
@@ -216,7 +216,7 @@ export default function Book() {
         : parseInt(selectedHour);
 
     const reservationData = {
-      token, // token을 직접 사용
+      token: user.token, // token을 user 객체에서 가져오기
       wellnessId: parseInt(id),
       content: value,
       headCnt: people,
@@ -233,7 +233,7 @@ export default function Book() {
       const response = await axios.post(`${API_URL}/book`, reservationData);
       if (response.status === 201) {
         alert("예약이 성공적으로 완료되었습니다.");
-        navigate('/booking')
+        navigateToPage("/booking");\
       } else {
         alert("예약에 실패하였습니다. 다시 시도해주세요.");
       }

@@ -1,3 +1,4 @@
+// SignUp.js
 import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -180,27 +181,26 @@ export default function SignUp() {
       userId: userid,
       password,
       nickName: name,
-      email,
+      eleMail: email,
     };
 
     try {
-      // 회원가입
-      await axios.post(`${API_URL}/member/signUp`, data, {
+      const response = await axios.post(`${API_URL}/member/signUp`, data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      console.log("회원가입 성공");
-
-      // 로그인
+      console.log("회원가입 성공:", response.data);
+      // 로그인 API 호출
       const loginResponse = await axios.post(`${API_URL}/member/login`, {
         userId: userid,
-        password, // 비밀번호 전달 수정
+        password,
       });
 
-      const { token, nickName } = loginResponse.data; // 로그인 응답에서 닉네임 추출
-      login({ nickName }, token); // 로그인 상태로 설정하며 사용자 정보를 전달 및 token 저장
+
+      const { token } = loginResponse.data;
+      login({ name }, token); // 로그인 상태로 설정하며 사용자 정보를 전달 및 token 저
       navigate("/"); // 홈 페이지로 리디렉션
     } catch (error) {
       console.error(
