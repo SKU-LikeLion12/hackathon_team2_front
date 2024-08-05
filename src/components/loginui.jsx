@@ -28,12 +28,15 @@ export default function Login() {
         },
       });
 
-      const { token, name } = response.data;
-      // console.log(response.data)
-      localStorage.setItem("token", token);
-      login({ userId: id }, token); // Pass token to login function
+      const token = response.data.token;
+      const name = response.data.nickName;
+      console.log(response.data);
+      console.log(token);
+      // localStorage.setItem("Token", token);
+      login({ userId: id }, response.data); // Pass token to login function
 
       alert(`${name}님 환영합니다!`);
+
       navigate("/");
     } catch (error) {
       console.error(
