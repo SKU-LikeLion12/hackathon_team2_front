@@ -16,7 +16,7 @@ export const UserProvider = ({ children }) => {
     nickName: "test_nickname",
     eleMail: "test_eMail",
     token: "string",
-    isOwner: 0,
+    isOwner: 0
   });
 
   return (

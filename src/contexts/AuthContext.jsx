@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+
     // 페이지가 로드될 때 로컬 스토리지에서 토큰을 읽어와 사용자 정보를 설정합니다.
     const token = localStorage.getItem("token");
     const userName = localStorage.getItem("userName");
