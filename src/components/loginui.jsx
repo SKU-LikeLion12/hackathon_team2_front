@@ -28,12 +28,11 @@ export default function Login() {
         },
       });
 
-      const { token, name } = response.data;
-      // console.log(response.data)
-      localStorage.setItem("token", token);
-      login({ userId: id }, token); // Pass token to login function
+      // const { token, name } = response.data;
+      localStorage.setItem("token", response.data.token);
+      // login({ userId: id, name }, response.data.token); // Pass token to login function
 
-      alert(`${name}님 환영합니다!`);
+      // alert(`${name}님 환영합니다!`);
       navigate("/");
     } catch (error) {
       console.error(
