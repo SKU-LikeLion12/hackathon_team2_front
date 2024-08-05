@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Calendar } from "primereact/calendar";
 import Footer from "../components/footer";
 import { AppBreadcrumb } from "../components/BreadCrumb";
@@ -7,9 +7,11 @@ import { locale, addLocale } from "primereact/api";
 import { InputNumber } from "primereact/inputnumber";
 import { InputTextarea } from "primereact/inputtextarea";
 import "primeicons/primeicons.css";
-import { useAuth } from "../contexts/AuthContext"; // useAuth 훅 임포트
+import { useAuth } from "../contexts/AuthContext";
+import axios from "axios";
 
 const { kakao } = window;
+const API_URL = process.env.REACT_APP_API_URL;
 
 // PrimeReact 한국어 로케일 설정
 addLocale("ko", {
@@ -61,7 +63,6 @@ locale("ko"); // 기본 로케일을 한국어로 설정
 
 // 커스텀 시간 선택기 컴포넌트
 const CustomTimePicker = ({ onTimeChange }) => {
-  // 시간, 분, 오전/오후
   const hours = Array.from({ length: 12 }, (_, i) =>
     (i + 1).toString().padStart(2, "0")
   );
@@ -75,50 +76,7 @@ const CustomTimePicker = ({ onTimeChange }) => {
   useEffect(() => {
     const time = `${selectedAmpm} ${selectedHour}시 ${selectedMinute}분`;
     onTimeChange(time);
-  }, [selectedHour, selectedMinute, selectedAmpm]);
-
-  useEffect(() => {
-    const container = document.getElementById("kamap"); // 지도를 담을 영역의 DOM 레퍼런스
-    const options = {
-      // 지도를 생성할 때 필요한 기본 옵션
-      center: new kakao.maps.LatLng(37.3902250644638, 126.645426431439), // 지도의 중심좌표
-      level: 5, // 지도의 레벨(확대, 축소 정도)
-    };
-
-    const map = new kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
-    const markerPosition = new kakao.maps.LatLng(
-      37.3902250644638,
-      126.645426431439
-    );
-
-    // 마커 생성
-    const marker = new kakao.maps.Marker({
-      position: markerPosition,
-    });
-
-    // 마커를 지도 위에 표시
-    marker.setMap(map);
-
-    // 인포윈도우에 표출될 내용
-    const iwContent = `
-    <div class="flex flex-col justify-center items-center p-4">
-      장소명
-    </div>`;
-    // 인포윈도우 표시 위치
-    const iwPosition = new kakao.maps.LatLng(
-      37.3902250644638,
-      126.645426431439
-    );
-
-    // 인포윈도우를 생성
-    const infowindow = new kakao.maps.InfoWindow({
-      position: iwPosition,
-      content: iwContent,
-    });
-
-    // 마커 위에 인포윈도우를 표시
-    infowindow.open(map, marker);
-  }, []);
+  }, [selectedHour, selectedMinute, selectedAmpm, onTimeChange]);
 
   return (
     <div className="flex items-center space-x-4 custom-time-picker">
@@ -161,13 +119,16 @@ const CustomTimePicker = ({ onTimeChange }) => {
 };
 
 export default function Book() {
+  const { id } = useParams();
   const [date, setDate] = useState(null);
+  const [dateString, setDateString] = useState("");
   const [time, setTime] = useState("오전 00:00");
   const [people, setPeople] = useState(null);
   const [value, setValue] = useState("");
+  const [placeData, setPlaceData] = useState(null);
 
   const navigate = useNavigate();
-  const { user } = useAuth(); // 로그인 상태 확인
+  const { user } = useAuth();
 
   useEffect(() => {
     if (!user) {
@@ -175,6 +136,109 @@ export default function Book() {
       navigate("/login");
     }
   }, [user, navigate]);
+
+  useEffect(() => {
+    const fetchPlaceData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/detail/get/${id}`);
+        setPlaceData(response.data);
+      } catch (error) {
+        console.error("Error fetching place data:", error);
+      }
+    };
+
+    if (id) {
+      fetchPlaceData();
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (placeData && placeData.lati && placeData.hard) {
+      const container = document.getElementById("kamap");
+      const options = {
+        center: new kakao.maps.LatLng(placeData.lati, placeData.hard),
+        level: 5,
+      };
+
+      const map = new kakao.maps.Map(container, options);
+      const markerPosition = new kakao.maps.LatLng(
+        placeData.lati,
+        placeData.hard
+      );
+
+      new kakao.maps.Marker({
+        position: markerPosition,
+        map: map,
+      });
+
+      const iwContent = `
+        <div class="flex flex-col justify-center items-center p-4">
+          ${placeData.title || "장소명"}
+        </div>`;
+      const iwPosition = new kakao.maps.LatLng(placeData.lati, placeData.hard);
+
+      new kakao.maps.InfoWindow({
+        position: iwPosition,
+        content: iwContent,
+      }).open(
+        map,
+        new kakao.maps.Marker({
+          position: markerPosition,
+          map: map,
+        })
+      );
+    }
+  }, [placeData]);
+
+  const handleDateChange = (e) => {
+    setDate(e.value);
+    if (e.value) {
+      const year = e.value.getFullYear();
+      const month = (e.value.getMonth() + 1).toString().padStart(2, "0");
+      const day = e.value.getDate().toString().padStart(2, "0");
+      const formattedDate = `${year}-${month}-${day}`;
+      setDateString(formattedDate);
+      console.log("Selected Date:", formattedDate);
+    }
+  };
+
+  const handleReservation = async () => {
+    const [selectedAmpm, selectedHour, selectedMinute] = time
+      .split(/시|분| /)
+      .filter(Boolean);
+    const isPM = selectedAmpm === "오후";
+    const hour24 =
+      isPM && selectedHour !== "12"
+        ? parseInt(selectedHour) + 12
+        : parseInt(selectedHour);
+
+    const reservationData = {
+      token: user.token, // Assuming user.token is available from useAuth context
+      wellnessId: parseInt(id),
+      content: value,
+      headCnt: people,
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate(),
+      hour: hour24,
+      minute: parseInt(selectedMinute),
+    };
+
+    console.log("Reservation Data:", reservationData);
+
+    try {
+      const response = await axios.post(`${API_URL}/book`, reservationData);
+      if (response.status === 200) {
+        alert("예약이 성공적으로 완료되었습니다.");
+        navigateToPage("/booking");
+      } else {
+        alert("예약에 실패하였습니다. 다시 시도해주세요.");
+      }
+    } catch (error) {
+      console.error("예약 중 오류 발생:", error);
+      alert("예약 중 오류가 발생하였습니다. 다시 시도해주세요.");
+    }
+  };
 
   const navigateToPage = (path) => {
     navigate(path);
@@ -184,16 +248,15 @@ export default function Book() {
     <div className="relative flex flex-col items-center font-['GmarketSans']">
       <AppBreadcrumb />
       <div className="flex flex-col items-center justify-center p-12">
-        {/* 예약 타이틀 */}
         <div className="border-b-[1px] border-[#E1E1E1] w-full text-center text-2xl p-8 mb-12">
           예약
         </div>
         <div className="flex justify-center space-x-6">
-          <div className="flex border-2 border-[#47A5A5] px-3 py-4 ">
+          <div className="flex border-2 border-[#47A5A5] px-3 py-4">
             <div className="p-4 border-r-2 border-[#E1E1E1] h-full flex items-center">
               <Calendar
                 value={date}
-                onChange={(e) => setDate(e.value)}
+                onChange={handleDateChange}
                 inline
                 showWeek={false}
                 locale="ko"
@@ -247,19 +310,25 @@ export default function Book() {
               className="h-72 w-72 bg-black border-2 border-[#499a94]"
             ></div>
             <div className="bg-white h-1/2">
-              <div className="flex items-center justify-between w-full mt-8">
-                title상호명
-                <i className="px-2 py-2 text-sm text-center border rounded-full pi pi-thumbs-up-fill">
-                  숫자
-                </i>
-              </div>
-              <div className="font-['GmarketSans-light'] my-3">address주소</div>
-              <div className="font-['GmarketSans-light'] my-3">hp연락처</div>
+              {placeData && (
+                <>
+                  <div className="flex items-center justify-between w-full mt-8">
+                    {placeData.title}
+                    <i className="px-2 py-2 text-sm text-center border rounded-full pi pi-thumbs-up-fill">
+                      {placeData.likes}
+                    </i>
+                  </div>
+                  <div className="font-['GmarketSans-light'] my-3">
+                    {placeData.address}
+                  </div>
+                  <div className="font-['GmarketSans-light'] my-3">
+                    {placeData.contact}
+                  </div>
+                </>
+              )}
               <button
                 className="w-full my-2 rounded-xl bg-[#499a94] text-white font-['Pretendard'] p-3"
-                onClick={() => {
-                  navigateToPage("/booking");
-                }}
+                onClick={handleReservation}
               >
                 예약하기
               </button>
