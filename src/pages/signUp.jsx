@@ -180,10 +180,7 @@ export default function SignUp() {
     const email = `${emailLocalPart}@${emailDomain}`;
     const data = {
       userId: userid,
-      userId: userid,
       password,
-      nickName: name,
-      eleMail: email,
       nickName: name,
       eleMail: email,
     };
