@@ -13,8 +13,7 @@ export default function Master() {
   const [selectedRow, setSelectedRow] = useState(null);
   const [title, setTitle] = useState(""); // 상태에 title 추가
   const { user } = useAuth();
-  const { reservations, setReservations, updateReservationStatus } =
-    useReservations();
+  const { reservations, setReservations } = useReservations();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -63,10 +62,39 @@ export default function Master() {
     setPopupVisible(!popupVisible);
   };
 
-  const handleStatusChange = (newStatus) => {
+  const handleStatusChange = async (newStatus) => {
     if (selectedRow !== null) {
       const reservationId = reservations[selectedRow].id;
-      updateReservationStatus(reservationId, newStatus);
+      const isBookValue =
+        newStatus === "수락" ? 1 : newStatus === "대기중" ? 0 : -1;
+      try {
+        console.log("Sending PUT request:", {
+          token: user.token,
+          bookId: reservationId,
+          isBook: isBookValue,
+        });
+        const response = await axios.put(
+          `${API_URL}/book/isBook`,
+          { token: user.token, bookId: reservationId, isBook: isBookValue },
+          { headers: { "Content-Type": "application/json" } }
+        );
+        console.log("Response from PUT request:", response.data);
+        // 상태 업데이트
+        setReservations((prevReservations) =>
+          prevReservations.map((reservation, index) =>
+            index === selectedRow
+              ? { ...reservation, status: newStatus }
+              : reservation
+          )
+        );
+      } catch (error) {
+        console.error("Error updating reservation status:", error);
+        if (error.response) {
+          console.error("Response data:", error.response.data);
+          console.error("Response status:", error.response.status);
+        }
+        alert("예약 상태를 변경하지 못했습니다. 다시 시도해주세요.");
+      }
     }
     setPopupVisible(false);
   };
