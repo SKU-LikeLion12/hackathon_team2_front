@@ -74,7 +74,7 @@ export default function Booking() {
                 <div className="flex justify-between pb-2 font-thin">
                   <span className="text-gray-600">인원</span>
                   <span className="font-medium border-b border-[#E1E1E1]">
-                    {bookingDetails.people}
+                    {bookingDetails.headCnt}
                   </span>
                 </div>
                 <div className="flex justify-between font-thin">
@@ -114,7 +114,7 @@ export default function Booking() {
               문의내용
             </span>
             <textarea
-              className="w-full p-8 mt-2 border border-gray-300"
+              className="w-full p-8 mt-2 border border-gray-300 font-['GmarketSans']"
               defaultValue={bookingDetails.content || ""}
               readOnly
             />
