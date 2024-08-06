@@ -67,19 +67,19 @@ export default function Booking() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex justify-between pb-2 font-thin">
                   <span className="text-gray-600">이름</span>
-                  <span className="font-medium border-b border-[#E1E1E1]">
+                  <span className="font-medium border-b px-20 border-[#E1E1E1]">
                     {bookingDetails.nickName}
                   </span>
                 </div>
                 <div className="flex justify-between pb-2 font-thin">
                   <span className="text-gray-600">인원</span>
-                  <span className="font-medium border-b border-[#E1E1E1]">
+                  <span className="font-medium border-b px-20 border-[#E1E1E1]">
                     {bookingDetails.headCnt}
                   </span>
                 </div>
                 <div className="flex justify-between font-thin">
                   <span className="text-gray-600">장소</span>
-                  <span className="font-medium border-b border-[#E1E1E1]">
+                  <span className="font-medium border-b px-20 border-[#E1E1E1]">
                     {bookingDetails.title}
                   </span>
                 </div>
@@ -91,13 +91,13 @@ export default function Booking() {
                 </div>
                 <div className="flex justify-between font-thin">
                   <span className="text-gray-600">이메일</span>
-                  <span className="font-medium border-b border-gray-300">
+                  <span className="font-medium border-b px-4 border-gray-300">
                     {bookingDetails.eleMail}
                   </span>
                 </div>
                 <div className="flex justify-between font-thin">
                   <span className="text-gray-600">예약 상태</span>
-                  <span className="font-medium border-b border-gray-300">
+                  <span className="font-medium border-b px-20 border-gray-300">
                     {bookingDetails.isBook === 1
                       ? "수락"
                       : bookingDetails.isBook === 0
