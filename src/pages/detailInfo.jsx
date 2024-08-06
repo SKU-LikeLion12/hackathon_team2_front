@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // useNavigate 추가
 import axios from "axios";
 import Footer from "../components/footer";
 import "primeicons/primeicons.css";
@@ -26,6 +26,7 @@ export default function DetailInfo() {
   const [detailInfo, setDetailInfo] = useState("");
   const [mainPage, setMainPage] = useState("");
   const [locationNumber, setLocationNumber] = useState(null); // location 번호를 저장할 상태 추가
+  const navigate = useNavigate(); // useNavigate 훅 추가
 
   useEffect(() => {
     const fetchDetailInfo = async () => {
@@ -110,10 +111,14 @@ export default function DetailInfo() {
     }
   }, [detailInfo]);
 
+  const navigateToPage = (path, wellnessId) => {
+    navigate(`${path}/${wellnessId}`); // 특정 ID를 경로에 추가
+  };
+
   return (
     <div className="relative">
       <div className="flex flex-col items-center mx-auto w-[80%] py-12 font-['GmarketSans']">
-        <div className="w-full text-center font-bold text-2xl mb-8">
+        <div className="w-full mb-8 text-2xl font-bold text-center">
           {detailInfo.title}
           {detailInfo ? detailInfo.name : "Loading..."}
         </div>
@@ -169,15 +174,16 @@ export default function DetailInfo() {
             ></SwiperSlide>
           </Swiper>
         </div>
-        <div className="w-full text-center mt-8">{detailInfo.introduce}</div>
-        <div className="flex space-x-5 justify-center items-center mt-12">
+        <div className="w-full mt-8 text-center">{detailInfo.introduce}</div>
+        <div className="flex items-center justify-center mt-12 space-x-5">
           <div>좋아요</div>
           <div>리뷰</div>
-          <Link to="/book">
-            <button className="bg-[#47A5A5] font-['GmarketSans-light'] font-semibold text-white text-xl rounded-xl px-32 py-3">
-              예약하기
-            </button>
-          </Link>
+          <button
+            onClick={() => navigateToPage("/book", id)} // 예약 페이지로 이동
+            className="bg-[#47A5A5] font-['GmarketSans-light'] font-semibold text-white text-xl rounded-xl px-32 py-3"
+          >
+            예약하기
+          </button>
         </div>
         <div className="flex mt-12 w-[90%] justify-center border-t-[2px] border-[#E1E1E1] py-8">
           <div
@@ -186,8 +192,8 @@ export default function DetailInfo() {
           >
             카카오 지도
           </div>
-          <div className="detailli flex flex-col h-80 ml-10">
-            <ul className="flex flex-col h-full justify-between">
+          <div className="flex flex-col ml-10 detailli h-80">
+            <ul className="flex flex-col justify-between h-full">
               <li className="flex flex-col">
                 <span className="title">오시는 길</span>
                 <div className="description">

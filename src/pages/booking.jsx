@@ -66,15 +66,15 @@ export default function Booking() {
             <div className="mb-8">
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex justify-between pb-2 font-thin">
-                  <span className="text-gray-600">예약 ID</span>
-                  <span className="font-medium border-b border-[#E1E1E1]">
-                    {bookingDetails.bookId}
-                  </span>
-                </div>
-                <div className="flex justify-between pb-2 font-thin">
                   <span className="text-gray-600">이름</span>
                   <span className="font-medium border-b border-[#E1E1E1]">
                     {bookingDetails.nickName}
+                  </span>
+                </div>
+                <div className="flex justify-between pb-2 font-thin">
+                  <span className="text-gray-600">인원</span>
+                  <span className="font-medium border-b border-[#E1E1E1]">
+                    {bookingDetails.people}
                   </span>
                 </div>
                 <div className="flex justify-between font-thin">
@@ -107,17 +107,17 @@ export default function Booking() {
                 </div>
               </div>
             </div>
-            {/* 문의 내용 */}
-            <div className="mb-8">
-              <span className="text-gray-600 font-['GmarketSans'] font-thin">
-                문의내용
-              </span>
-              <textarea
-                className="w-full p-8 mt-2 border border-gray-300"
-                defaultValue={bookingDetails.content || ""}
-                readOnly
-              />
-            </div>
+          </div>
+          {/* 문의 내용 */}
+          <div className="mb-8">
+            <span className="text-gray-600 font-['GmarketSans'] font-thin">
+              문의내용
+            </span>
+            <textarea
+              className="w-full p-8 mt-2 border border-gray-300"
+              defaultValue={bookingDetails.content || ""}
+              readOnly
+            />
           </div>
           {/* 하단 버튼 */}
           <hr className="flex w-[100%] my-4 justify-center border-t-2 border-[#47A5A5]" />
