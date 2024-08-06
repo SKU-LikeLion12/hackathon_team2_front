@@ -10,7 +10,6 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 export default function View() {
   const [reservations, setReservations] = useState([]);
-  const [paginatedBookings, setPaginatedBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -69,10 +68,6 @@ export default function View() {
     fetchReservations();
   }, [user, navigate]);
 
-  useEffect(() => {
-    setPaginatedBookings(reservations.slice(first, first + rows));
-  }, [first, rows, reservations]);
-
   const handlePlaceClick = (bookId) => {
     console.log("Navigating to booking ID:", bookId);
     navigate(`/booking/${bookId}`);
@@ -114,29 +109,31 @@ export default function View() {
                 </tr>
               </thead>
               <tbody>
-                {paginatedBookings.length > 0 ? (
-                  paginatedBookings.map((reservation) => (
-                    <tr
-                      key={reservation.id}
-                      onClick={() => handlePlaceClick(reservation.id)}
-                    >
-                      <td className="font-['GmarketSans'] font-thin border p-2 text-center">
-                        {reservation.id}
-                      </td>
-                      <td className="font-['GmarketSans'] font-thin border p-2 text-center">
-                        {reservation.title}
-                      </td>
-                      <td className="font-['GmarketSans'] font-thin border p-2 text-center">
-                        {reservation.headCnt}
-                      </td>
-                      <td className="font-['GmarketSans'] font-thin border p-2 text-center">
-                        {reservation.checkIn}
-                      </td>
-                      <td className="font-['GmarketSans'] font-thin border p-2 text-center">
-                        {reservation.status}
-                      </td>
-                    </tr>
-                  ))
+                {reservations.length > 0 ? (
+                  reservations
+                    .slice(first, first + rows)
+                    .map((reservation, index) => (
+                      <tr
+                        key={reservation.id}
+                        onClick={() => handlePlaceClick(reservation.id)}
+                      >
+                        <td className="font-['GmarketSans'] font-thin border p-2 text-center">
+                          {first + index + 1}
+                        </td>
+                        <td className="font-['GmarketSans'] font-thin border p-2 text-center">
+                          {reservation.title}
+                        </td>
+                        <td className="font-['GmarketSans'] font-thin border p-2 text-center">
+                          {reservation.headCnt}
+                        </td>
+                        <td className="font-['GmarketSans'] font-thin border p-2 text-center">
+                          {reservation.checkIn}
+                        </td>
+                        <td className="font-['GmarketSans'] font-thin border p-2 text-center">
+                          {reservation.status}
+                        </td>
+                      </tr>
+                    ))
                 ) : (
                   <tr>
                     <td
