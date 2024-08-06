@@ -91,7 +91,7 @@ export default function Booking() {
                 </div>
                 <div className="flex justify-between font-thin">
                   <span className="text-gray-600">이메일</span>
-                  <span className="font-medium border-b px-4 border-gray-300">
+                  <span className="font-medium border-b border-gray-300">
                     {bookingDetails.eleMail}
                   </span>
                 </div>

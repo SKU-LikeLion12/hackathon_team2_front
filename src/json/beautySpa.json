@@ -1,0 +1,116 @@
+[
+  {
+    "wellness_id": 1,
+    "location": 3,
+    "theme": 1,
+    "title": "테라피 스파 소베"
+  },
+  {
+    "wellness_id": 2,
+    "location": 1,
+    "theme": 1,
+    "title": "더스파하스타"
+  },
+  {
+    "wellness_id": 11,
+    "location": 0,
+    "theme": 1,
+    "title": "SPA 1899 동인비"
+  },
+  {
+    "wellness_id": 13,
+    "location": 0,
+    "theme": 1,
+    "title": "올리바인 스파"
+  },
+  {
+    "wellness_id": 18,
+    "location": 4,
+    "theme": 1,
+    "title": "스파랜드 센텀시티"
+  },
+  {
+    "wellness_id": 20,
+    "location": 2,
+    "theme": 1,
+    "title": "리조트 스파밸리"
+  },
+  {
+    "wellness_id": 21,
+    "location": 2,
+    "theme": 1,
+    "title": "뷰라운지"
+  },
+  {
+    "wellness_id": 22,
+    "location": 1,
+    "theme": 1,
+    "title": "파라다이스시티 씨메르"
+  },
+  {
+    "wellness_id": 23,
+    "location": 1,
+    "theme": 1,
+    "title": "더 스파 앳 파라다이스"
+  },
+  {
+    "wellness_id": 24,
+    "location": 6,
+    "theme": 1,
+    "title": "허브아일랜드 허브 힐링센터"
+  },
+  {
+    "wellness_id": 25,
+    "location": 6,
+    "theme": 1,
+    "title": "아쿠아 필드 고양"
+  },
+  {
+    "wellness_id": 33,
+    "location": 7,
+    "theme": 1,
+    "title": "오색 그린야드 호텔"
+  },
+  {
+    "wellness_id": 34,
+    "location": 7,
+    "theme": 1,
+    "title": "동해보양온천 컨벤션 호텔"
+  },
+  {
+    "wellness_id": 35,
+    "location": 7,
+    "theme": 1,
+    "title": "설해원"
+  },
+  {
+    "wellness_id": 37,
+    "location": 8,
+    "theme": 1,
+    "title": "포레스트리솜 해브나인 힐링스파"
+  },
+  {
+    "wellness_id": 40,
+    "location": 9,
+    "theme": 1,
+    "title": "파라다이스 스파 도고"
+  },
+  {
+    "wellness_id": 41,
+    "location": 9,
+    "theme": 1,
+    "title": "에덴힐스 뷰티&힐링파크"
+  },
+  {
+    "wellness_id": 42,
+    "location": 10,
+    "theme": 1,
+    "title": "진안 홍삼스파"
+  },
+  {
+    "wellness_id": 47,
+    "location": 11,
+    "theme": 1,
+    "title": "태평염전 해양힐링 스파"
+  }
+]

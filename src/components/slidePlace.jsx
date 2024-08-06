@@ -51,7 +51,7 @@ const SlidePlace = ({ places }) => {
           <SwiperSlide key={place.wellnessId}>
             <div className="flex items-center justify-center h-64">
               <img
-                src={`${process.env.PUBLIC_URL}/img/resourceEnd/${place.location}/${place.wellnessId}/1.png`} //아마자 추가 해야됨
+                src={`${process.env.PUBLIC_URL}/img/resourceEnd/${place.location}/${place.wellnessId}/1.png`} 
                 alt={place.title}
                 className="object-cover w-full h-full cursor-pointer"
                 onClick={() => {

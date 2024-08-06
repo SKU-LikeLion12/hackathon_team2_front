@@ -8,7 +8,15 @@ import Footer from "../components/footer";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const InputField = React.memo(
-  ({ label, name, placeholder, type = "text", value, onChange, onDuplicateCheck }) => (
+  ({
+    label,
+    name,
+    placeholder,
+    type = "text",
+    value,
+    onChange,
+    onDuplicateCheck,
+  }) => (
     <div className="flex items-center w-full mb-4">
       <label className="flex items-center flex-shrink-0 mr-5 text-left w-36">
         {label}
@@ -192,16 +200,12 @@ export default function SignUp() {
       });
 
       console.log("회원가입 성공:", response.data);
-      // 로그인 API 호출
-      const loginResponse = await axios.post(`${API_URL}/member/login`, {
-        userId: userid,
-        password,
-      });
 
+      // 회원가입 성공 후 축하 메시지 표시
+      alert(`회원가입을 축하드립니다! ${formData.name}님! 로그인 해주세요.`);
 
-      const { token } = loginResponse.data;
-      login({ name }, token); // 로그인 상태로 설정하며 사용자 정보를 전달 및 token 저
-      navigate("/"); // 홈 페이지로 리디렉션
+      // 로그인 페이지로 이동
+      navigate("/login");
     } catch (error) {
       console.error(
         "회원가입 실패:",
