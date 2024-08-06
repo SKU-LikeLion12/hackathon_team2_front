@@ -2,14 +2,24 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/footer";
-import { useAuth } from "../contexts/AuthContext"; // useAuth 훅 임포트
+import { useAuth } from "../contexts/AuthContext";
+import "primeicons/primeicons.css";
+import { Paginator } from "primereact/paginator";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default function View() {
   const [bookings, setBookings] = useState([]);
+  const [paginatedBookings, setPaginatedBookings] = useState([]);
   const navigate = useNavigate();
-  const { user } = useAuth(); // 로그인 상태 확인
+  const { user } = useAuth();
+  const [first, setFirst] = useState(0);
+  const [rows, setRows] = useState(10);
+
+  const onPageChange = (event) => {
+    setFirst(event.first);
+    setRows(event.rows);
+  };
 
   useEffect(() => {
     if (!user) {
@@ -25,22 +35,32 @@ export default function View() {
           "로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?"
         );
         if (redirect) {
-          navigate("/login"); // 로그인 페이지로 리디렉션
+          navigate("/login");
         }
         return;
       }
 
       try {
-        const response = await axios.get(`${API_URL}/book/myPage`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setBookings(response.data);
+        const response = await axios.post(
+          `${API_URL}/book/myPage`,
+          { token: token },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("예약 데이터: ", response.data);
+
+        const sortedBookings = response.data.sort(
+          (a, b) => new Date(b.checkIn) - new Date(a.checkIn)
+        );
+
+        setBookings(sortedBookings);
+        setPaginatedBookings(sortedBookings.slice(first, first + rows));
       } catch (error) {
         console.error("API 요청 실패:", error);
         if (error.response && error.response.status === 401) {
-          // 토큰이 유효하지 않은 경우
           alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
           localStorage.removeItem("token");
           navigate("/login");
@@ -53,10 +73,17 @@ export default function View() {
     fetchBookings();
   }, [user, navigate]);
 
+  useEffect(() => {
+    setPaginatedBookings(bookings.slice(first, first + rows));
+  }, [first, rows, bookings]);
+
+  const handlePlaceClick = (bookId) => {
+    console.log("Navigating to booking ID:", bookId);
+    navigate(`/booking/${bookId}`);
+  };
+
   return (
     <div>
-      {/* <Header />
-      <Nav /> */}
       <div className="flex items-center justify-center min-h-screen mt-4">
         <div className="w-full max-w-2xl bg-white">
           <div className="mb-8 text-center">
@@ -64,7 +91,6 @@ export default function View() {
             <hr className="flex justify-center my-8 border-t border-gray-300" />
           </div>
 
-          {/* 예약 정보 */}
           <div className="flex justify-center mb-8">
             <table className="w-full border-collapse border-gray-300 table-auto">
               <thead>
@@ -84,13 +110,16 @@ export default function View() {
                 </tr>
               </thead>
               <tbody>
-                {bookings.length > 0 ? (
-                  bookings.map((booking, index) => (
+                {paginatedBookings.length > 0 ? (
+                  paginatedBookings.map((booking, index) => (
                     <tr key={index}>
                       <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
-                        {index + 1}
+                        {bookings.length - (first + index)}
                       </td>
-                      <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center ">
+                      <td
+                        className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center cursor-pointer text-blue-500"
+                        onClick={() => handlePlaceClick(booking.bookId)}
+                      >
                         {booking.title}
                       </td>
                       <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
@@ -105,10 +134,7 @@ export default function View() {
                               ? "대기"
                               : "취소"}
                           </div>
-                          {/* <img
-                            src={`${process.env.PUBLIC_URL}/img/${booking.isBook === 1 ? 'o' : booking.isBook === 0 ? 'triangle' : 'x'}.png`}
-                            className="absolute transform -translate-x-1/2 -translate-y-1/2 top-3 left-1/2"
-                          /> */}
+                          <p className="hidden">{booking.bookId}</p>
                         </div>
                       </td>
                     </tr>
@@ -127,19 +153,19 @@ export default function View() {
             </table>
           </div>
 
-          <div className="relative flex items-center justify-center">
-            <div className="absolute font-['GmarketSans']">1</div>
-            <img
-              src={`${process.env.PUBLIC_URL}/img/next.png`}
-              className="flex justify-center "
-            />
-          </div>
+          <Paginator
+            first={first}
+            rows={rows}
+            totalRecords={bookings.length}
+            rowsPerPageOptions={[5, 10]}
+            onPageChange={onPageChange}
+            className="mt-4 mb-8"
+          />
 
-          {/* 하단 버튼 */}
           <div className="flex justify-center space-x-4">
             <button
-              className="px-[20%] py-2 text-white bg-[#47A5A5] border border-gray-400 rounded-lg  font-['GmarketSans'] mt-[25%]"
-              onClick={() => (window.location.href = "/")}
+              className="px-[20%] py-2 text-white bg-[#47A5A5] border border-gray-400 rounded-lg font-['GmarketSans'] mt-[25%]"
+              onClick={() => navigate("/")}
             >
               홈으로 가기
             </button>

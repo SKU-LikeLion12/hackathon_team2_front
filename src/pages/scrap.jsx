@@ -30,14 +30,27 @@ export default function Scrap() {
     }
 
     try {
-      const response = await axios.get(`${API_URL}/scrap/myPage`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      console.log("사용자 토큰:", token);
+      const response = await axios.post(
+        `${API_URL}/scrap/myPage`,
+        { token },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // 서버 응답 데이터 확인
+      console.log("스크랩 데이터:", response.data);
       setScrapData(response.data);
     } catch (error) {
       console.error("스크랩 데이터를 가져오는 데 실패했습니다:", error);
+      if (error.response) {
+        console.error("서버 응답 오류:", error.response.data);
+        console.error("서버 응답 상태:", error.response.status);
+      } else {
+        console.error("네트워크 오류:", error.message);
+      }
       alert("스크랩 데이터를 가져오는 데 실패했습니다.");
     }
   };
@@ -60,19 +73,19 @@ export default function Scrap() {
       <button className="border-b-2 border-[#E1E1E1] w-[70%] flex justify-end text-sm mt-12 px-12 text-[#656565]">
         편집
       </button>
-      <div className="p-12">
+      <div className="p-12 flex space-x-4">
         {scrapData.length > 0 ? (
           scrapData.slice(first, first + rows).map((scrap, index) => (
             <div key={index} className="mb-4">
               <img
-                src={scrap.imageUrl || ""}
-                alt=""
+                src={`${process.env.PUBLIC_URL}/img/resourceEnd/${scrap.location}/${scrap.wellness_id}/1.png`} // 이미지 URL을 실제로 변경
+                alt={scrap.title}
                 className="w-64 bg-gray-200 h-52"
               />
               <div className="flex items-center justify-between p-3">
                 <div>{scrap.title}</div>
                 <i className="justify-end pb-2 text-sm text-center pi pi-thumbs-up-fill">
-                  {scrap.likeCount}
+                  {scrap.likeCount || 0}
                 </i>
               </div>
             </div>
@@ -85,7 +98,7 @@ export default function Scrap() {
         first={first}
         rows={rows}
         totalRecords={scrapData.length}
-        rowsPerPageOptions={[5, 10]}
+        rowsPerPageOptions={[3, 5]}
         onPageChange={onPageChange}
         className="mt-4 mb-8"
       />
