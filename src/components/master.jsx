@@ -11,9 +11,10 @@ export default function Master() {
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
   const [selectedRow, setSelectedRow] = useState(null);
+  const [title, setTitle] = useState(""); // 상태에 title 추가
   const { user } = useAuth();
   const { reservations, setReservations, updateReservationStatus } =
-    useReservations(); // useReservations 호출 추가
+    useReservations();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +31,12 @@ export default function Master() {
           { headers: { "Content-Type": "application/json" } }
         );
         console.log("예약 데이터: ", response.data);
+
+        // 제목을 API 응답에서 첫 번째 예약의 title로 설정
+        if (response.data.length > 0) {
+          setTitle(response.data[0].title);
+        }
+
         setReservations(
           response.data.map((res) => ({
             id: res.bookId,
@@ -70,7 +77,10 @@ export default function Master() {
         <div className="w-full max-w-2xl bg-white">
           <div className="mb-8 text-center">
             <h1 className="text-2xl font-['GmarketSans'] mb-[4%]">예약 조회</h1>
-            <p className="font-['GmarketSans'] font-thin">장소명</p>
+            <p className="font-['GmarketSans'] font-thin">
+              {title || "장소명"}
+            </p>{" "}
+            {/* 동적으로 제목 표시 */}
             <hr className="flex justify-center my-8 border-t border-gray-300" />
           </div>
 
