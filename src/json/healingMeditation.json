@@ -1,0 +1,104 @@
+[
+  {
+    "wellness_id": 7,
+    "location": 7,
+    "theme": 3,
+    "title": "산림힐링재단(하이힐링원)"
+  },
+  {
+    "wellness_id": 8,
+    "location": 13,
+    "theme": 3,
+    "title": "숲애서"
+  },
+  {
+    "wellness_id": 9,
+    "location": 1,
+    "theme": 3,
+    "title": "현대요트 인천"
+  },
+  {
+    "wellness_id": 14,
+    "location": 0,
+    "theme": 3,
+    "title": "비스타 워커힐 웰니스 클럽"
+  },
+  {
+    "wellness_id": 16,
+    "location": 0,
+    "theme": 3,
+    "title": "메이필드 호텔서울"
+  },
+  {
+    "wellness_id": 26,
+    "location": 7,
+    "theme": 3,
+    "title": "힐리언스 선마을"
+  },
+  {
+    "wellness_id": 28,
+    "location": 7,
+    "theme": 3,
+    "title": "파크로쉬 리조트 & 웰니스"
+  },
+  {
+    "wellness_id": 29,
+    "location": 7,
+    "theme": 3,
+    "title": "로미지안 가든"
+  },
+  {
+    "wellness_id": 31,
+    "location": 7,
+    "theme": 3,
+    "title": "뮤지엄 산 명상관"
+  },
+  {
+    "wellness_id": 36,
+    "location": 8,
+    "theme": 3,
+    "title": "깊은산속옹달샘 아침편지 명상치유센터"
+  },
+  {
+    "wellness_id": 38,
+    "location": 8,
+    "theme": 3,
+    "title": "좌구산 자연 휴양림"
+  },
+  {
+    "wellness_id": 48,
+    "location": 11,
+    "theme": 3,
+    "title": "전남권 환경성 질환 예방관리센터"
+  },
+  {
+    "wellness_id": 52,
+    "location": 12,
+    "theme": 3,
+    "title": "인문힐링센터 여명"
+  },
+  {
+    "wellness_id": 55,
+    "location": 13,
+    "theme": 3,
+    "title": "한화 벨버디어 웰니스"
+  },
+  {
+    "wellness_id": 60,
+    "location": 14,
+    "theme": 3,
+    "title": "서귀포시 WE 호텔 웰니스 센터"
+  },
+  {
+    "wellness_id": 62,
+    "location": 14,
+    "theme": 3,
+    "title": "취다선 리조트"
+  },
+  {
+    "wellness_id": 64,
+    "location": 14,
+    "theme": 3,
+    "title": "제주901"
+  }
+]

@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Footer from "../components/footer";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import beautySpa from "../json/beautySpa.json"; // beautySpa.json 파일 임포트
+import "primeicons/primeicons.css";
+import { useAuth } from "../contexts/AuthContext";
+import axios from "axios";
 
 export default function BeautySpa() {
-  const [mainPageData, setMainPageData] = useState([]);
+  const [mainPageData, setBeauty] = useState([]);
   const [selectedRegion, setSelectedRegion] = useState("서울");
+  const [bookmarkedItems, setBookmarkedItems] = useState({});
   const seoulRef = useRef(null);
   const gyeonggiRef = useRef(null);
   const incheonRef = useRef(null);
@@ -20,25 +22,61 @@ export default function BeautySpa() {
   const busanRef = useRef(null);
   const jeonbukRef = useRef(null);
   const navigate = useNavigate();
+  const { user } = useAuth(); // AuthContext에서 user 가져오기
+  
+  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    const fetchMainPage = async () => {
+    const fetchBeauty = async () => {
       try {
-        const response = await axios.get(`${API_URL}/mainPage`);
-        const filteredData = response.data.filter((item) => item.theme === 0);
-        setMainPageData(filteredData);
+        setBeauty(beautySpa);
       } catch (error) {
-        console.error("Error fetching mainPage:", error);
+        console.log("실패");
       }
     };
 
-    fetchMainPage();
+    fetchBeauty();
   }, []);
 
   const scrollToSection = (ref, region) => {
     setSelectedRegion(region);
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleIconClick = async (id) => {
+    if (!user) {
+      alert("로그인 후 북마크를 할 수 있습니다.");
+      return;
+    }
+
+    const isBookmarked = !bookmarkedItems[id];
+    setBookmarkedItems((prev) => ({
+      ...prev,
+      [id]: isBookmarked,
+    }));
+
+    if (isBookmarked) {
+      try {
+        const response = await axios.post(`${API_URL}/scrap/add`, {
+          token: user.token,
+          wellnessId: id,
+        });
+        console.log("북마크 추가 성공:", response.data);
+      } catch (error) {
+        console.error(
+          "북마크 추가 실패:",
+          error.response ? error.response.data : error.message
+        );
+        alert("북마크 추가 실패");
+        console.error("북마크 추가 실패:", error);
+        // 북마크 실패 시 상태 롤백
+        setBookmarkedItems((prev) => ({
+          ...prev,
+          [id]: !isBookmarked,
+        }));
+      }
     }
   };
 
@@ -116,7 +154,7 @@ export default function BeautySpa() {
                   {groupByLocation(region.locationId).map((item) => (
                     <div key={item.wellness_id}>
                       <img
-                        src={`${process.env.PUBLIC_URL}/location/wellness${item.wellness_id}.png`}
+                        src={`${process.env.PUBLIC_URL}/img/resourceEnd/${item.location}/${item.wellness_id}.png`}
                         alt={item.title}
                         onClick={() =>
                           navigateToPage("/detailInfo", item.wellness_id)
@@ -125,6 +163,16 @@ export default function BeautySpa() {
                       />
                       <div className="font-['GmarketSans'] mt-[8px]">
                         {item.title}
+                      </div>
+                      <div
+                        onClick={() => handleIconClick(item.wellness_id)}
+                        className="cursor-pointer"
+                      >
+                        {bookmarkedItems[item.wellness_id] ? (
+                          <i className="py-2 text-base text-center pi pi-bookmark-fill" />
+                        ) : (
+                          <i className="py-2 text-base text-center pi pi-bookmark" />
+                        )}
                       </div>
                     </div>
                   ))}
