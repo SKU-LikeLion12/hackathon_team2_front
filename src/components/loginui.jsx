@@ -27,17 +27,20 @@ export default function Login() {
           "Content-Type": "application/json",
         },
       });
-      
-      const token = response.data.token;
-      const name = response.data.nickName;
-      console.log(response.data);
-      console.log(token);
-      // localStorage.setItem("Token", token);
-      login({ userId: id }, response.data); // Pass token to login function
 
-      alert(`${name}님 환영합니다!`);
+      if (response.data) {
+        const token = response.data.token;
+        const name = response.data.nickName;
+        console.log(response.data);
+        console.log(token);
+        login({ userId: id }, response.data); // Pass token to login function
 
-      navigate("/");
+        alert(`${name}님 환영합니다!`);
+        navigate("/");
+      } else {
+        alert("회원이 아닙니다. 회원가입해주세요.");
+        navigate("/signUp");
+      }
     } catch (error) {
       console.error(
         "로그인 실패:",
