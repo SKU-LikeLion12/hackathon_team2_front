@@ -2,62 +2,61 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/footer";
+import { useReservations } from "../contexts/ReservationContext";
 import { useAuth } from "../contexts/AuthContext";
-import "primeicons/primeicons.css";
 import { Paginator } from "primereact/paginator";
+import "primeicons/primeicons.css";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default function View() {
-  const [bookings, setBookings] = useState([]);
   const [paginatedBookings, setPaginatedBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { reservations } = useReservations(); // Context에서 예약 목록 가져오기
+  const { user } = useAuth(); // 로그인 상태 확인
   const [first, setFirst] = useState(0);
   const [rows, setRows] = useState(10);
 
+  // 페이지 변경 시 호출되는 함수
   const onPageChange = (event) => {
     setFirst(event.first);
     setRows(event.rows);
   };
 
   useEffect(() => {
+    // 로그인하지 않은 경우 홈으로 리다이렉트
     if (!user) {
-      alert("로그인이 필요합니다!");
+      alert("로그인 우선 해주세요!");
       navigate("/login");
       return;
     }
 
-    const fetchBookings = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        const redirect = window.confirm(
-          "로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?"
-        );
-        if (redirect) {
-          navigate("/login");
-        }
-        return;
-      }
-
+    // API에서 예약 데이터를 가져오는 함수
+    const fetchReservations = async () => {
       try {
         const response = await axios.post(
           `${API_URL}/book/myPage`,
-          { token: token },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+          { token: user.token, isOwner: 0 },
+          { headers: { "Content-Type": "application/json" } }
         );
         console.log("예약 데이터: ", response.data);
 
+        // 예약 데이터를 가공하여 상태에 저장
         const sortedBookings = response.data.sort(
           (a, b) => new Date(b.checkIn) - new Date(a.checkIn)
         );
+        const mappedReservations = sortedBookings.map((res) => ({
+          id: res.bookId,
+          title: res.title,
+          headCnt: `${res.headCnt}인`,
+          checkIn: res.checkIn,
+          status:
+            res.isBook === 0 ? "대기중" : res.isBook === 1 ? "수락" : "거절",
+        }));
 
-        setBookings(sortedBookings);
-        setPaginatedBookings(sortedBookings.slice(first, first + rows));
+        console.log("가공된 예약 데이터: ", mappedReservations);
+        // setReservations(mappedReservations); // Context에 예약 데이터 저장
       } catch (error) {
         console.error("API 요청 실패:", error);
         if (error.response && error.response.status === 401) {
@@ -67,20 +66,27 @@ export default function View() {
         } else {
           alert("예약 정보를 불러오지 못했습니다. 다시 시도해주세요.");
         }
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchBookings();
+    fetchReservations();
   }, [user, navigate]);
 
   useEffect(() => {
-    setPaginatedBookings(bookings.slice(first, first + rows));
-  }, [first, rows, bookings]);
+    console.log("예약 상태 업데이트: ", reservations);
+    setPaginatedBookings(reservations.slice(first, first + rows));
+  }, [first, rows, reservations]); // reservations가 변경될 때마다 호출
 
   const handlePlaceClick = (bookId) => {
     console.log("Navigating to booking ID:", bookId);
     navigate(`/booking/${bookId}`);
   };
+
+  if (loading) {
+    return <div>Loading...</div>; // 로딩 중일 때 표시할 UI
+  }
 
   return (
     <div>
@@ -91,18 +97,22 @@ export default function View() {
             <hr className="flex justify-center my-8 border-t border-gray-300" />
           </div>
 
+          {/* 예약 정보 */}
           <div className="flex justify-center mb-8">
             <table className="w-full border-collapse border-gray-300 table-auto">
               <thead>
                 <tr>
                   <th className="font-['GmarketSans'] font-normal border border-t-2 border-t-gray-500 border-gray-200 p-2">
-                    번호
+                    순서
                   </th>
                   <th className="font-['GmarketSans'] font-normal border border-t-2 border-t-gray-500 border-gray-300 p-2">
-                    장소
+                    제목
                   </th>
                   <th className="font-['GmarketSans'] font-normal border border-t-2 border-t-gray-500 border-gray-300 p-2">
-                    예약일
+                    인원
+                  </th>
+                  <th className="font-['GmarketSans'] font-normal border border-t-2 border-t-gray-500 border-gray-300 p-2">
+                    체크인
                   </th>
                   <th className="font-['GmarketSans'] font-normal border border-t-2 border-t-gray-500 border-gray-300 p-2">
                     승인여부
@@ -111,38 +121,32 @@ export default function View() {
               </thead>
               <tbody>
                 {paginatedBookings.length > 0 ? (
-                  paginatedBookings.map((booking, index) => (
-                    <tr key={index}>
-                      <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
-                        {bookings.length - (first + index)}
+                  paginatedBookings.map((reservation) => (
+                    <tr
+                      key={reservation.id}
+                      onClick={() => handlePlaceClick(reservation.id)}
+                    >
+                      <td className="font-['GmarketSans'] font-thin border p-2 text-center">
+                        {reservation.id}
                       </td>
-                      <td
-                        className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center cursor-pointer text-blue-500"
-                        onClick={() => handlePlaceClick(booking.bookId)}
-                      >
-                        {booking.title}
+                      <td className="font-['GmarketSans'] font-thin border p-2 text-center">
+                        {reservation.title}
                       </td>
-                      <td className="font-['GmarketSans'] font-thin border border-gray-300 p-2 text-center">
-                        {booking.checkIn}
+                      <td className="font-['GmarketSans'] font-thin border p-2 text-center">
+                        {reservation.headCnt}
                       </td>
-                      <td className="font-['GmarketSans'] border border-gray-300 p-2 text-center relative">
-                        <div className="relative">
-                          <div>
-                            {booking.isBook === 1
-                              ? "수락"
-                              : booking.isBook === 0
-                              ? "대기"
-                              : "취소"}
-                          </div>
-                          <p className="hidden">{booking.bookId}</p>
-                        </div>
+                      <td className="font-['GmarketSans'] font-thin border p-2 text-center">
+                        {reservation.checkIn}
+                      </td>
+                      <td className="font-['GmarketSans'] font-thin border p-2 text-center">
+                        {reservation.status}
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
                     <td
-                      colSpan="4"
+                      colSpan="5"
                       className="font-['GmarketSans'] text-center p-4"
                     >
                       예약한 내역이 없습니다.
@@ -153,15 +157,18 @@ export default function View() {
             </table>
           </div>
 
-          <Paginator
-            first={first}
-            rows={rows}
-            totalRecords={bookings.length}
-            rowsPerPageOptions={[5, 10]}
-            onPageChange={onPageChange}
-            className="mt-4 mb-8"
-          />
+          {/* 페이지네이션 */}
+          <div className="flex justify-center mb-8">
+            <Paginator
+              first={first}
+              rows={rows}
+              totalRecords={reservations.length}
+              onPageChange={onPageChange}
+              rowsPerPageOptions={[5, 10]}
+            />
+          </div>
 
+          {/* 하단 버튼 */}
           <div className="flex justify-center space-x-4">
             <button
               className="px-[20%] py-2 text-white bg-[#47A5A5] border border-gray-400 rounded-lg font-['GmarketSans'] mt-[25%]"

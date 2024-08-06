@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext"; // useAuth 훅을 import
 
 export default function Nav() {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const brandRef = useRef(null);
   const themeRef = useRef(null);
   const reservationRef = useRef(null);
+  const { user } = useAuth(); // useAuth 훅으로 사용자 정보 가져오기
 
   const toggleDropdown = (dropdown) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
@@ -30,6 +32,8 @@ export default function Nav() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const reservationLink = user?.isOwner ? "/master" : "/view";
 
   return (
     <div className="border-b-[1px] border-gray-200">
@@ -119,7 +123,7 @@ export default function Nav() {
                 예약하기
               </Link>
               <Link
-                to="/view"
+                to={reservationLink}
                 className="block px-4 py-4 my-2 text-gray-800 hover:bg-gray-200 hover:font-['GmarketSans']"
               >
                 예약 조회
