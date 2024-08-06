@@ -153,8 +153,8 @@ export default function BeautySpa() {
                 <div className="flex flex-wrap items-center justify-center space-x-3">
                   {groupByLocation(region.locationId).map((item) => (
                     <div key={item.wellness_id}>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/img/resourceEnd/${item.location}/${item.wellness_id}.png`}
+                      <img                       
+                        src={`${process.env.PUBLIC_URL}/img/resourceEnd/${item.location}/${item.wellness_id}/${item.theme}.png`}                  
                         alt={item.title}
                         onClick={() =>
                           navigateToPage("/detailInfo", item.wellness_id)

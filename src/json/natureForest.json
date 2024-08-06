@@ -1,0 +1,128 @@
+[
+  {
+    "wellness_id": 3,
+    "location": 7,
+    "theme": 2,
+    "title": "삼척 활기치유의숲"
+  },
+  {
+    "wellness_id": 4,
+    "location": 12,
+    "theme": 2,
+    "title": "국립칠곡 숲체원"
+  },
+  {
+    "wellness_id": 5,
+    "location": 14,
+    "theme": 2,
+    "title": "제원하늘농원"
+  },
+  {
+    "wellness_id": 6,
+    "location": 8,
+    "theme": 2,
+    "title": "국립제천 치유의숲"
+  },
+  {
+    "wellness_id": 19,
+    "location": 5,
+    "theme": 2,
+    "title": "국립대운산 치유의숲"
+  },
+  {
+    "wellness_id": 27,
+    "location": 7,
+    "theme": 2,
+    "title": "동해무릉 건강숲"
+  },
+  {
+    "wellness_id": 19,
+    "location": 5,
+    "theme": 2,
+    "title": "국립대운산 치유의숲"
+  },
+  {
+    "wellness_id": 30,
+    "location": 7,
+    "theme": 2,
+    "title": "하이원 HAO 웰니스"
+  },
+  {
+    "wellness_id": 32,
+    "location": 7,
+    "theme": 2,
+    "title": "용평 리조트 발왕산"
+  },
+  {
+    "wellness_id": 39,
+    "location": 9,
+    "theme": 2,
+    "title": "팜카밀레"
+  },
+  {
+    "wellness_id": 45,
+    "location": 11,
+    "theme": 2,
+    "title": "순천만 국가정원 & 순천만 습지"
+  },
+  {
+    "wellness_id": 46,
+    "location": 11,
+    "theme": 2,
+    "title": "정남진 편백숲 우드랜드"
+  },
+  {
+    "wellness_id": 49,
+    "location": 11,
+    "theme": 2,
+    "title": "국립장성 숲체원"
+  },
+  {
+    "wellness_id": 50,
+    "location": 12,
+    "theme": 2,
+    "title": "국립산림치유원"
+  },
+  {
+    "wellness_id": 51,
+    "location": 12,
+    "theme": 2,
+    "title": "금강송 에코리움"
+  },
+  {
+    "wellness_id": 53,
+    "location": 12,
+    "theme": 2,
+    "title": "국립김천 치유의숲"
+  },
+  {
+    "wellness_id": 57,
+    "location": 13,
+    "theme": 2,
+    "title": "합천군 오도산 치유의 숲"
+  },
+  {
+    "wellness_id": 58,
+    "location": 13,
+    "theme": 2,
+    "title": "통영시 나폴리 농원"
+  },
+  {
+    "wellness_id": 59,
+    "location": 13,
+    "theme": 2,
+    "title": "거창군 거창 항노화 힐링랜드"
+  },
+  {
+    "wellness_id": 61,
+    "location": 14,
+    "theme": 2,
+    "title": "서귀포시 서귀포 치유의 숲"
+  },
+  {
+    "wellness_id": 63,
+    "location": 14,
+    "theme": 2,
+    "title": "환상숲 곶자왈 공원"
+  }
+]

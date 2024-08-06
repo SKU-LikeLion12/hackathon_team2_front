@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/footer";
-import healingMeditation from "../json/healingMeditation.json"; 
+import healingMeditation from "../json/hh.json";
 import "primeicons/primeicons.css";
 import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
@@ -85,10 +85,10 @@ export default function HealingMeditation() {
   };
 
   const regions = [
-    { name: "인천", ref: incheonRef, locationId: 2 },
-    { name: "강원특별자치도", ref: gangwondoRef, locationId: 3 },
-    { name: "충청북도", ref: choongbukRef, locationId: 4 },
-    { name: "전라남도", ref: jeonnamRef, locationId: 9 },
+    { name: "인천", ref: incheonRef, locationId: 1 },
+    { name: "강원특별자치도", ref: gangwondoRef, locationId: 7 },
+    { name: "충청북도", ref: choongbukRef, locationId: 8 },
+    { name: "전라남도", ref: jeonnamRef, locationId: 11 },
     { name: "경상남도", ref: gyeongnamRef, locationId: 11 },
     { name: "경상북도", ref: gyeongbukRef, locationId: 12 },
     { name: "제주특별자치도", ref: jejuRef, locationId: 13 },
@@ -97,7 +97,7 @@ export default function HealingMeditation() {
   return (
     <div className="relative">
       <div className="relative z-[-20] justify-center">
-        <img src={`${process.env.PUBLIC_URL}/img/beautySpa.png`} alt="로고" />
+        <img src={`${process.env.PUBLIC_URL}/img/Healing.png`} alt="로고" />
         <div className="absolute left-[45%] top-[26%] font-['GmarketSans'] text-[40px] font-bold">
           힐링 / 명상
         </div>
@@ -145,8 +145,9 @@ export default function HealingMeditation() {
                 <div className="flex flex-wrap items-center justify-center space-x-3">
                   {groupByLocation(region.locationId).map((item) => (
                     <div key={item.wellness_id}>
+                      {console.log(`Image path: ${process.env.PUBLIC_URL}/img/resourceEnd/${item.location}/${item.wellness_id}.png`)}
                       <img
-                        src={`${process.env.PUBLIC_URL}/img/resourceEnd/${item.location}/${item.wellness_id}.png`}
+                        src={`${process.env.PUBLIC_URL}/img/resourceEnd/${item.location}/${item.wellness_id}/${item.theme}.png`}                  
                         alt={item.title}
                         onClick={() =>
                           navigateToPage("/detailInfo", item.wellness_id)

@@ -1,0 +1,104 @@
+[
+  {
+    "wellness_id": 31,
+    "title": "뮤지엄 산 명상관",
+    "location": 7,
+    "theme": 3
+  },
+  {
+    "wellness_id": 64,
+    "title": "제주901",
+    "location": 14,
+    "theme": 3
+  },
+  {
+    "wellness_id": 62,
+    "title": "취다선 리조트",
+    "location": 14,
+    "theme": 3
+  },
+  {
+    "wellness_id": 60,
+    "title": "서귀포시 WE 호텔 웰니스 센터",
+    "location": 14,
+    "theme": 3
+  },
+  {
+    "wellness_id": 55,
+    "title": "한화 벨버디어 웰니스",
+    "location": 13,
+    "theme": 3
+  },
+  {
+    "wellness_id": 52,
+    "title": "인문힐링센터 여명",
+    "location": 12,
+    "theme": 3
+  },
+  {
+    "wellness_id": 48,
+    "title": "전남권 환경성 질환 예방관리센터",
+    "location": 11,
+    "theme": 3
+  },
+  {
+    "wellness_id": 38,
+    "title": "좌구산 자연 휴양림",
+    "location": 8,
+    "theme": 3
+  },
+  {
+    "wellness_id": 36,
+    "title": "깊은산속옹달샘 아침편지 명상치유센터",
+    "location": 8,
+    "theme": 3
+  },
+  {
+    "wellness_id": 7,
+    "title": "산림힐링재단(하이힐링원)",
+    "location": 7,
+    "theme": 3
+  },
+  {
+    "wellness_id": 29,
+    "title": "로미지안 가든",
+    "location": 7,
+    "theme": 3
+  },
+  {
+    "wellness_id": 28,
+    "title": "파크로쉬 리조트 & 웰니스",
+    "location": 7,
+    "theme": 3
+  },
+  {
+    "wellness_id": 26,
+    "title": "힐리언스 선마을",
+    "location": 7,
+    "theme": 3
+  },
+  {
+    "wellness_id": 16,
+    "title": "메이필드 호텔서울",
+    "location": 0,
+    "theme": 3
+  },
+  {
+    "wellness_id": 14,
+    "title": "비스타 워커힐 웰니스 클럽",
+    "location": 0,
+    "theme": 3
+  },
+  {
+    "wellness_id": 9,
+    "title": "현대요트 인천",
+    "location": 1,
+    "theme": 3
+  },
+  {
+    "wellness_id": 8,
+    "title": "숲애서",
+    "location": 13,
+    "theme": 3
+  }
+]
