@@ -64,6 +64,10 @@ export default function Scrap() {
     fetchScrapData();
   }, [user, navigate]);
 
+  const navigateToPage = (path, id) => {
+    navigate(`${path}/${id}`);
+  };
+
   return (
     <div className="relative flex flex-col items-center font-['GmarketSans']">
       <AppBreadcrumb />
@@ -80,7 +84,10 @@ export default function Scrap() {
               <img
                 src={`${process.env.PUBLIC_URL}/img/resourceEnd/${scrap.location}/${scrap.wellness_id}/1.png`} // 이미지 URL을 실제로 변경
                 alt={scrap.title}
-                className="w-64 bg-gray-200 h-52"
+                className="w-64 bg-gray-200 h-52 cursor-pointer"
+                onClick={() => {
+                  navigateToPage("/detailInfo", scrap.wellness_id);
+                }}
               />
               <div className="flex items-center justify-between p-3">
                 <div>{scrap.title}</div>
